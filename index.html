@@ -3,378 +3,899 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jerung Wall Street — US Smart Money & Momentum Radar · Selasa 6 Okt 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<title>Jerung Wall Street — US Smart Money &amp; Momentum Radar · Selasa 6 Okt 2026 (LIVE)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
-:root{
-  --bg:#0B0D10; --card:#13161C; --card2:#171B23; --border:#1F242D; --border2:#2A3140;
-  --accent:#C9A227; --green:#22C55E; --red:#EF4444; --amber:#F59E0B;
-  --muted:#7A8292; --text:#E6E9EF; --dim:#9AA3B2;
-  --mono:'JetBrains Mono',Consolas,'Cascadia Mono',ui-monospace,monospace;
-  --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --disp:'Space Grotesk','Inter',system-ui,sans-serif;
+:root {
+    /* Tactical Whale Terminal Theme (US Edition) */
+    --bg-color: #090A0F;
+    --bg-gradient: radial-gradient(circle at 80% 0%, #131722 0%, #090A0F 60%);
+    --panel-bg: #131722;
+    --panel-border: #2A2E39;
+    --text-main: #E2E8F0;
+    --text-muted: #9CA3AF;
+    --accent: #F59E0B;
+    --accent-glow: rgba(245, 158, 11, 0.2);
+    --success: #089981;
+    --success-glow: rgba(8, 153, 129, 0.2);
+    --danger: #F23645;
+    --warning: #F59E0B;
+    --info: #06B6D4;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased}
-.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.wrap{max-width:1560px;margin:0 auto;padding:0 18px 60px}
-a{color:var(--accent);text-decoration:none}
-.hide{display:none!important}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.8); border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, rgba(99, 102, 241, 0.5), rgba(168, 85, 247, 0.5)); border-radius: 4px; }
+html, body { max-width: 100%; overflow-x: hidden; }
+body {
+    background-color: var(--bg-color);
+    background-image:
+        radial-gradient(circle at 15% 20%, rgba(245, 158, 11, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.03) 0%, transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    padding: 0.75rem 1rem;
+    min-height: 100vh;
+    position: relative;
+}
+body::before, body::after {
+    content: ''; position: fixed; width: 40vw; height: 40vw; border-radius: 50%;
+    filter: blur(80px); z-index: -1; opacity: 0.5; animation: float 20s infinite alternate ease-in-out; pointer-events: none;
+}
+body::before { background: rgba(250, 204, 21, 0.07); top: -10vw; left: -10vw; }
+body::after { background: rgba(255, 23, 68, 0.05); bottom: -10vw; right: -10vw; animation-duration: 25s; animation-delay: -5s; }
+@keyframes float { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(50px,50px) scale(1.1); } }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-.topbar{position:sticky;top:0;z-index:50;background:rgba(11,13,16,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-.topbar-inner{max-width:1560px;margin:0 auto;padding:10px 18px 6px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:10px}
-.logo{width:30px;height:30px;background:var(--accent);color:#0B0D10;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:700;font-size:14px;border-radius:4px}
-.brand h1{font-family:var(--disp);font-size:16px;letter-spacing:.04em;font-weight:700}
-.brand small{display:block;color:var(--muted);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:500}
-.badges{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
-.badge{font-family:var(--mono);font-size:10.5px;color:var(--dim);border:1px solid var(--border2);padding:4px 9px;border-radius:3px;background:var(--card);letter-spacing:.02em}
-.badge.gold{color:var(--accent);border-color:rgba(201,162,39,.45)}
-.badge.ok{color:var(--green);border-color:rgba(34,197,94,.4)}
-.dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:1px;background:var(--green);box-shadow:0 0 6px rgba(34,197,94,.8)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.dot.live{animation:pulse 1.6s infinite}
+.pulse { display: inline-block; width: 8px; height: 8px; background-color: var(--success); border-radius: 50%; box-shadow: 0 0 10px var(--success); animation: pulse 2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(8,153,129,.7);} 70% { box-shadow: 0 0 0 8px rgba(8,153,129,0);} 100% { box-shadow: 0 0 0 0 rgba(8,153,129,0);} }
+.subtitle { color: var(--text-muted); font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem; }
+.font-mono { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.up { color: #10b981; } .down { color: var(--danger); } .warn { color: var(--warning); } .neut { color: var(--text-muted); }
 
-.tabs-inner{max-width:1560px;margin:0 auto;padding:2px 18px 9px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
-.tabs-inner::-webkit-scrollbar{display:none}
-.tab{font-family:var(--mono);font-size:11px;color:var(--dim);background:transparent;border:1px solid var(--border2);padding:5px 12px;border-radius:3px;cursor:pointer;white-space:nowrap;letter-spacing:.02em}
-.tab:hover{color:var(--text);border-color:var(--muted)}
-.tab.on{color:#0B0D10;background:var(--accent);border-color:var(--accent);font-weight:700}
+/* ===== Header ===== */
+.dashboard-header {
+    margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.85rem; padding: 1rem 1.25rem;
+    background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(99, 102, 241, 0.25); border-bottom: 2px solid rgba(99, 102, 241, 0.5);
+    border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.top-global-nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.85rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(51,65,85,.4); }
+.brand-header { display: inline-flex; align-items: center; gap: 0.6rem; }
+.brand-header h1 {
+    font-family: 'Outfit', sans-serif; font-size: 1.65rem; font-weight: 900;
+    background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 50%, #34d399 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.02em; margin: 0; line-height: 1;
+}
+.brand-badge { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; padding: 0.2rem 0.5rem; border-radius: 4px; background: rgba(99,102,241,.2); color: #a5b4fc; border: 1px solid rgba(99,102,241,.35); }
+.nav-links-bar { display: inline-flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
+.nav-btn { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.38rem 0.75rem; border-radius: 7px; font-size: 0.78rem; font-weight: 700; text-decoration: none; color: #cbd5e1; background: rgba(30,41,59,.75); border: 1px solid rgba(148,163,184,.2); transition: all .2s cubic-bezier(.4,0,.2,1); white-space: nowrap; cursor: pointer; }
+.nav-btn:hover { background: rgba(51,65,85,.95); border-color: rgba(148,163,184,.5); color: #fff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.3); }
+.nav-btn-portal { background: linear-gradient(135deg, rgba(99,102,241,.25), rgba(79,70,229,.35)); border-color: rgba(99,102,241,.5); color: #c7d2fe; box-shadow: 0 2px 8px rgba(99,102,241,.2); }
+.nav-btn-portal:hover { background: linear-gradient(135deg, #6366f1, #4f46e5); border-color: #818cf8; color: #fff; box-shadow: 0 4px 16px rgba(99,102,241,.45); }
+.nav-btn-amber { background: linear-gradient(135deg, rgba(245,158,11,.2), rgba(217,119,6,.25)); border-color: rgba(245,158,11,.45); color: #fde68a; box-shadow: 0 2px 8px rgba(245,158,11,.15); }
+.nav-btn-amber:hover { background: linear-gradient(135deg, #f59e0b, #d97706); border-color: #fbbf24; color: #0f172a; font-weight: 800; box-shadow: 0 4px 16px rgba(245,158,11,.45); }
+.tier2-hero-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.85rem; }
+.subtitle-group { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.sentiment-badge-box { display: inline-flex; align-items: center; gap: 0.45rem; background: rgba(15,23,42,.7); padding: 0.35rem 0.8rem; border-radius: 20px; border: 1px solid var(--panel-border); font-weight: 700; font-size: 0.8rem; }
+.tracker-pnl-badge { display: inline-flex; align-items: center; gap: 0.6rem; background: linear-gradient(135deg, rgba(16,185,129,.2), rgba(56,189,248,.16)); border: 1.5px solid rgba(52,211,153,.6); padding: 0.45rem 1rem; border-radius: 9999px; box-shadow: 0 0 20px rgba(52,211,153,.25); cursor: pointer; transition: transform .2s, box-shadow .2s; }
+.tracker-pnl-badge:hover { transform: scale(1.03); box-shadow: 0 0 26px rgba(52,211,153,.5); }
+.controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.ctrl-chip { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(30,41,59,.8); padding: 0.35rem 0.6rem; border-radius: 8px; border: 1px solid rgba(148,163,184,.3); transition: all .2s ease-in-out; }
+.ctrl-chip label { font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; gap: 0.2rem; cursor: pointer; user-select: none; }
+.ctrl-chip select { background: rgba(15,23,42,.9); color: white; border: 1px solid rgba(148,163,184,.4); border-radius: 6px; padding: 0.2rem 0.4rem; font-size: 0.75rem; font-weight: 700; cursor: pointer; outline: none; font-family: inherit; }
+.ctrl-chip input[type=checkbox] { cursor: pointer; width: 14px; height: 14px; }
+.btn { background: var(--accent); color: white; border: none; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all .2s; }
+.btn:hover { background: #d97706; box-shadow: 0 0 10px rgba(245,158,11,.4); }
 
-.mkt{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
-.chip{display:flex;gap:7px;align-items:baseline;background:var(--card);border:1px solid var(--border);padding:5px 11px;border-radius:3px;font-size:12px}
-.chip b{font-family:var(--disp);font-weight:600;letter-spacing:.03em;font-size:11.5px}
-.up{color:var(--green)} .down{color:var(--red)} .warn{color:var(--amber)}
+/* ===== Live chip + market chips ===== */
+.live-chip { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(15,23,42,.7); border: 1px solid var(--panel-border); border-radius: 20px; padding: 0.3rem 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted); }
+.dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--text-muted); vertical-align: 1px; }
+.dot.live { background: #10b981; box-shadow: 0 0 8px rgba(16,185,129,.9); animation: pulse 1.6s infinite; }
+.mkt-strip { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+.chip { display: inline-flex; gap: 7px; align-items: baseline; background: var(--panel-bg); border: 1px solid var(--panel-border); padding: 0.35rem 0.7rem; border-radius: 8px; font-size: 0.78rem; }
+.chip b { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: .03em; font-size: 0.76rem; }
+.tv-tape { margin: 0 0 0.75rem; border: 1px solid var(--panel-border); border-radius: 10px; background: var(--panel-bg); overflow: hidden; min-height: 46px; }
 
-.expl{background:linear-gradient(90deg,rgba(201,162,39,.09),rgba(201,162,39,.02));border-left:3px solid var(--accent);border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border);border-radius:4px;padding:12px 16px;margin:16px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:6px 28px}
-.expl h3{grid-column:1/-1;font-family:var(--disp);font-size:13px;color:var(--accent);letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
-.expl p{color:var(--dim);font-size:12.3px}
-.expl b{color:var(--text)}
+/* ===== Platform description box ===== */
+.platform-box { background: linear-gradient(135deg, rgba(15,23,42,.95), rgba(99,102,241,.06)); border: 1px solid rgba(99,102,241,.3); border-radius: 16px; padding: 1.25rem; margin-bottom: 1.25rem; }
+.platform-box h2 { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 800; color: #e2e8f0; display: inline; }
+.platform-box p { font-size: 0.85rem; color: #94a3b8; margin-top: 0.6rem; line-height: 1.65; }
+.platform-box .learn-link { font-size: 0.78rem; color: #38bdf8; font-weight: 700; cursor: pointer; }
 
-section{margin-top:34px}
-.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;flex-wrap:wrap}
-.sec-head h2{font-family:var(--disp);font-size:15px;letter-spacing:.04em;font-weight:600}
-.sec-head h2 .tick{color:var(--accent);margin-right:6px}
-.sec-head .sub{color:var(--muted);font-size:12px}
-.pills{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
-.pill{font-family:var(--mono);font-size:10.5px;color:var(--dim);border:1px solid var(--border2);background:var(--card);border-radius:3px;padding:3px 9px}
-.pill b{color:var(--text);font-weight:600}
-.pill.g b{color:var(--green)} .pill.r b{color:var(--red)} .pill.a b{color:var(--amber)}
-.radar-desc{color:var(--dim);font-size:12px;margin:0 0 12px;max-width:1200px}
+/* ===== Tabs ===== */
+.tabs-nav { margin-bottom: 1rem; margin-top: 0.5rem; display: flex; gap: 0.2rem; flex-wrap: wrap; background: rgba(15,23,42,.5); padding: 0.4rem; border-radius: 10px; border: 1px solid var(--panel-border); }
+.tab-btn { background: transparent; color: var(--text-muted); border: none; padding: 0.4rem 0.65rem; border-radius: 8px; font-weight: 700; font-size: 0.8rem; cursor: pointer; transition: all .2s ease; white-space: nowrap; flex: 0 0 auto; }
+.tab-btn.active { background: linear-gradient(135deg, var(--accent), #4f46e5); color: white; box-shadow: 0 4px 15px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,.2); }
+.tab-btn:hover:not(.active) { color: white; background: rgba(255,255,255,.08); transform: translateY(-1px); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
 
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:13px 15px;border-left:3px solid var(--accent);position:relative}
-.kpi .lbl{color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
-.kpi .val{font-family:var(--mono);font-size:19px;font-weight:600}
-.kpi .note{color:var(--dim);font-size:11.5px;margin-top:3px}
-.kpi.g{border-left-color:var(--green)} .kpi.r{border-left-color:var(--red)} .kpi.a{border-left-color:var(--amber)}
+/* ===== Radar cards ===== */
+.radar-card { border-radius: 16px; padding: 1.25rem; margin-bottom: 1.25rem; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+.radar-gold { background: linear-gradient(135deg, rgba(15,23,42,.95), rgba(234,179,8,.08)); border: 2px dashed #eab308; box-shadow: 0 10px 30px rgba(234,179,8,.15); }
+.radar-cyan { background: linear-gradient(135deg, rgba(15,23,42,.95), rgba(6,182,212,.08)); border: 2px dashed #22d3ee; box-shadow: 0 10px 30px rgba(6,182,212,.15); }
+.radar-red { background: linear-gradient(135deg, rgba(15,23,42,.95), rgba(244,63,94,.07)); border: 2px dashed #fb7185; box-shadow: 0 10px 30px rgba(244,63,94,.12); }
+.radar-green { background: linear-gradient(135deg, rgba(15,23,42,.95), rgba(16,185,129,.07)); border: 2px dashed #34d399; box-shadow: 0 10px 30px rgba(16,185,129,.12); }
+.radar-purple { background: linear-gradient(135deg, rgba(15,23,42,.95), rgba(168,85,247,.07)); border: 2px dashed #c4b5fd; box-shadow: 0 10px 30px rgba(168,85,247,.12); }
+.radar-blob { position: absolute; top: -50px; left: -50px; width: 150px; height: 150px; filter: blur(50px); border-radius: 50%; pointer-events: none; }
+.radar-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(148,163,184,.2); }
+.radar-head .r-emoji { font-size: 1.8rem; }
+.radar-head h2 { margin: 0; font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 900; letter-spacing: 0.5px; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.5rem; }
+.radar-head p { margin: 0.25rem 0 0 0; font-size: 0.8rem; color: #94a3b8; }
+.head-pill { font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 20px; font-weight: 800; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.3rem; }
+.hp-gold { background: rgba(234,179,8,.2); color: #fde047; border: 1px solid rgba(234,179,8,.3); }
+.hp-cyan { background: rgba(6,182,212,.2); color: #22d3ee; border: 1px solid rgba(6,182,212,.3); }
+.hp-green { background: rgba(16,185,129,.2); color: #34d399; border: 1px solid rgba(16,185,129,.3); }
+.hp-red { background: rgba(244,63,94,.2); color: #fb7185; border: 1px solid rgba(244,63,94,.3); }
+.hp-purple { background: rgba(168,85,247,.2); color: #c4b5fd; border: 1px solid rgba(168,85,247,.3); }
 
-.heroes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
-.hero{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:15px 16px;position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent)}
-.hero .row1{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-.hero .tk{font-family:var(--disp);font-size:17px;font-weight:700;letter-spacing:.03em}
-.hero .nm{color:var(--muted);font-size:11.5px}
-.hero .price{text-align:right;font-family:var(--mono);font-size:15px}
-.hero .flow{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--green);margin:6px 0 2px}
-.hero .flab{color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em}
-.bar{height:7px;background:var(--card2);border-radius:2px;margin-top:10px;overflow:hidden;position:relative}
-.bar > i{display:block;height:100%;border-radius:2px}
-.bar.g > i{background:linear-gradient(90deg,rgba(34,197,94,.55),var(--green))}
-.bar.r > i{background:linear-gradient(90deg,rgba(239,68,68,.55),var(--red))}
-.bar.gold > i{background:linear-gradient(90deg,rgba(201,162,39,.5),var(--accent))}
-.hero .foot{display:flex;justify-content:space-between;margin-top:8px;color:var(--dim);font-size:11.5px;font-family:var(--mono)}
+/* ===== Stat strip (backtest-style boxes) ===== */
+.stat-strip { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.stat-box { background: rgba(15,23,42,.6); border: 1px solid var(--panel-border); border-radius: 10px; padding: 0.5rem 1rem; min-width: 108px; text-align: center; }
+.stat-box .lbl { font-size: 0.62rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+.stat-box .val { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.05rem; margin-top: 0.1rem; }
+.stat-box .val.g { color: #34d399; } .stat-box .val.r { color: var(--danger); } .stat-box .val.a { color: #fde047; } .stat-box .val.c { color: #22d3ee; }
 
-.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:auto}
-table{width:100%;border-collapse:collapse;font-size:12.3px;min-width:860px}
-thead th{position:sticky;top:0;background:var(--card2);color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;text-align:left;padding:9px 11px;border-bottom:1px solid var(--border2);cursor:pointer;user-select:none;white-space:nowrap;font-weight:600}
-thead th:hover{color:var(--text)}
-thead th .arr{opacity:.45;font-size:9px}
-tbody td{padding:8px 11px;border-bottom:1px solid var(--border);white-space:nowrap;font-family:var(--mono);font-variant-numeric:tabular-nums}
-tbody tr:hover td{background:rgba(201,162,39,.045)}
-tbody tr:last-child td{border-bottom:none}
-td.no{color:var(--muted);font-size:11px}
-td.tk{font-family:var(--disp);font-weight:600;letter-spacing:.03em;font-size:12.5px}
-td.nm{font-family:var(--sans);color:var(--dim);font-size:11.8px}
-td.note{font-family:var(--sans);color:var(--dim);font-size:11.5px;white-space:normal;min-width:150px}
-.tk2 .t{font-family:var(--disp);font-weight:600;letter-spacing:.03em;font-size:12.7px}
-.tk2 .n{display:block;font-size:10.8px;color:var(--dim);font-family:var(--sans);max-width:190px;overflow:hidden;text-overflow:ellipsis}
-.rbar{display:flex;align-items:center;gap:8px}
-.rbar .track{flex:1;max-width:110px;height:6px;background:var(--card2);border-radius:2px;overflow:hidden}
-.rbar .track i{display:block;height:100%;background:linear-gradient(90deg,rgba(34,197,94,.4),var(--green))}
-.rbar .pct{min-width:44px;text-align:right;color:var(--green)}
-.pos{color:var(--green)} .neg{color:var(--red)} .neut{color:var(--muted)}
-.tag{display:inline-block;font-family:var(--sans);font-size:10px;padding:2px 7px;border-radius:2px;border:1px solid var(--border2);color:var(--dim)}
-.tag.w{color:#8AB4F8;border-color:rgba(138,180,248,.35)}
-.tag.p{color:var(--accent);border-color:rgba(201,162,39,.4)}
-.tag.b{color:#C4B5FD;border-color:rgba(196,181,253,.35)}
-.flag{color:var(--amber);font-family:var(--sans)}
+/* ===== Tables ===== */
+.table-wrapper { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,.4); margin-bottom: 1rem; overflow-x: auto; }
+.table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+table { width: 100%; border-collapse: collapse; min-width: 800px; }
+th { background: #0D1117; color: var(--text-muted); font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--panel-border); text-align: left; white-space: nowrap; }
+th.sortable { cursor: pointer; user-select: none; }
+th.sortable:hover { color: #fff; }
+td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--panel-border); font-size: 0.86rem; transition: background .15s ease; white-space: nowrap; font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+tr { transition: all .1s ease; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,.03); }
+tr:hover { box-shadow: inset 3px 0 0 var(--accent); }
+td.tk { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.98rem; color: #fff; }
+td.tk a { color: #fff; text-decoration: none; }
+td.tk a:hover { color: #a5b4fc; }
+td.nm { font-family: 'Inter', sans-serif; color: var(--text-muted); font-size: 0.8rem; }
+td.note { font-family: 'Inter', sans-serif; color: var(--text-muted); font-size: 0.78rem; white-space: normal; min-width: 140px; }
+td.no { font-weight: 800; text-align: center; }
+.pill-tag { font-size: 0.62rem; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 800; display: inline-block; border: 1px solid; }
+.pt-sky { background: rgba(56,189,248,.15); color: #38bdf8; border-color: rgba(56,189,248,.3); }
+.pt-green { background: rgba(16,185,129,.15); color: #10b981; border-color: rgba(16,185,129,.3); }
+.pt-gold { background: rgba(234,179,8,.15); color: #fde047; border-color: rgba(234,179,8,.3); }
+.pt-purple { background: rgba(168,85,247,.15); color: #c4b5fd; border-color: rgba(168,85,247,.3); }
+.pt-red { background: rgba(244,63,94,.15); color: #fb7185; border-color: rgba(244,63,94,.3); }
+.pt-muted { background: rgba(148,163,184,.12); color: #cbd5e1; border-color: rgba(148,163,184,.25); }
+.ab { display: inline-block; font-size: 0.68rem; padding: 0.15rem 0.55rem; border-radius: 20px; border: 1px solid; white-space: nowrap; font-weight: 800; }
+.ab-g { background: rgba(16,185,129,.15); color: #34d399; border-color: rgba(16,185,129,.4); }
+.ab-r { background: rgba(244,63,94,.15); color: #fb7185; border-color: rgba(244,63,94,.4); }
+.ab-a { background: rgba(245,158,11,.15); color: #fbbf24; border-color: rgba(245,158,11,.4); }
+.ab-n { background: rgba(56,189,248,.15); color: #7dd3fc; border-color: rgba(56,189,248,.4); }
+.ab-m { background: rgba(148,163,184,.12); color: #cbd5e1; border-color: rgba(148,163,184,.3); }
+.sc { font-weight: 700; } .sc.hi { color: #34d399; } .sc.mid { color: #fbbf24; } .sc.lo { color: var(--text-muted); }
+.lvl { font-size: 0.8rem; line-height: 1.5; }
+.lvl .l1 { color: #e2e8f0; } .lvl .l2 { color: var(--text-muted); font-size: 0.74rem; }
+.tick-up { animation: tu .9s ease-out; } .tick-dn { animation: tdn .9s ease-out; }
+@keyframes tu { 0% { background: rgba(16,185,129,.35); } 100% { background: transparent; } }
+@keyframes tdn { 0% { background: rgba(242,54,69,.35); } 100% { background: transparent; } }
 
-.ab{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:2px;border:1px solid;white-space:nowrap;letter-spacing:.02em}
-.ab.g{color:var(--green);border-color:rgba(34,197,94,.45);background:rgba(34,197,94,.08)}
-.ab.r{color:var(--red);border-color:rgba(239,68,68,.45);background:rgba(239,68,68,.08)}
-.ab.a{color:var(--amber);border-color:rgba(245,158,11,.45);background:rgba(245,158,11,.08)}
-.ab.n{color:#8AB4F8;border-color:rgba(138,180,248,.45);background:rgba(138,180,248,.08)}
-.ab.m{color:var(--dim);border-color:var(--border2)}
-.sc{font-weight:600}
-.sc.hi{color:var(--green)} .sc.mid{color:var(--amber)} .sc.lo{color:var(--muted)}
-.lvl{font-size:11px;line-height:1.5}
-.lvl .l1{color:var(--text)}
-.lvl .l2{color:var(--dim);font-size:10.7px}
+/* ===== Cards (magnet modal) ===== */
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; margin-bottom: 1.25rem; }
+.ticker-card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-bottom: 2px solid transparent; border-radius: 12px; padding: 1.2rem; position: relative; overflow: hidden; transition: all .3s cubic-bezier(.175,.885,.32,1.275); box-shadow: 0 8px 32px rgba(0,0,0,.4); }
+.ticker-card:hover { transform: translateY(-4px); border-bottom: 2px solid var(--accent); box-shadow: 0 15px 40px var(--accent-glow); }
+.card-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.6rem; }
+.card-title { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 800; color: white; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; }
+.card-sector { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.15rem; }
+.card-price { font-size: 1.3rem; font-weight: 700; font-family: 'Outfit', sans-serif; text-align: right; }
+.card-change { font-size: 0.82rem; font-weight: 600; margin-top: 0.15rem; text-align: right; }
+.metric-bar-container { margin: 0.8rem 0 0.4rem; }
+.metric-bar-label { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+.metric-bar-bg { background: rgba(255,255,255,.05); height: 8px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(255,255,255,.05); }
+.metric-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(to right, var(--success), var(--accent)); transition: width .5s ease; }
+.params-list { background: rgba(15,23,42,.4); border-radius: 10px; padding: 0.7rem 0.8rem; margin-top: 0.8rem; border: 1px solid rgba(255,255,255,.03); }
+.param-row { display: flex; justify-content: space-between; font-size: 0.82rem; padding: 0.32rem 0; border-bottom: 1px solid rgba(255,255,255,.03); }
+.param-row:last-child { border-bottom: none; }
+.param-label { color: var(--text-muted); } .param-value { font-weight: 600; color: white; }
 
-.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px}
-.call{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:13px 15px;border-left:3px solid var(--muted)}
-.call.red{border-left-color:var(--red)} .call.amber{border-left-color:var(--amber)} .call.green{border-left-color:var(--green)}
-.call .h{display:flex;gap:8px;align-items:baseline;margin-bottom:5px;flex-wrap:wrap}
-.call .h b{font-family:var(--disp);font-size:13px;letter-spacing:.02em}
-.call .h span{font-size:10.5px;color:var(--muted);font-family:var(--mono)}
-.call p{color:var(--dim);font-size:12.2px}
-.call p b{color:var(--text)}
+/* ===== Calculator ===== */
+.interactive-panel { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+@media (max-width: 968px) { .interactive-panel { grid-template-columns: 1fr; } }
+.calc-card { background: linear-gradient(135deg, #161e33 0%, #0f172a 100%); border: 1px solid var(--accent); border-radius: 16px; padding: 1.8rem; box-shadow: 0 10px 35px rgba(99,102,241,.15); }
+.calc-header { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 800; color: #a5b4fc; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.5rem; }
+.calc-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.calc-group label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
+.calc-group select, .calc-group input { background: #0b0f19; border: 1px solid rgba(99,102,241,.4); color: white; padding: 0.65rem 1rem; border-radius: 8px; outline: none; font-size: 1rem; font-weight: 600; transition: all .2s; }
+.calc-group select:focus, .calc-group input:focus { border-color: var(--accent); box-shadow: 0 0 10px rgba(99,102,241,.3); }
+.calc-results { background: rgba(11,15,25,.8); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(255,255,255,.03); }
+.result-row { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,.05); }
+.result-row:last-child { border-bottom: none; }
+.result-label { color: var(--text-muted); font-size: 0.88rem; }
+.result-value { font-size: 1.05rem; font-weight: 700; color: white; font-family: 'JetBrains Mono', monospace; }
+.result-value.success { color: var(--success); } .result-value.danger { color: var(--danger); }
 
-.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:900px){.split{grid-template-columns:1fr}}
-.panel{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px 16px}
-.panel h3{font-family:var(--disp);font-size:13px;letter-spacing:.04em;margin-bottom:10px}
-.panel.g h3{color:var(--green)} .panel.r h3{color:var(--red)}
-.panel ul{list-style:none}
-.panel li{padding:7px 0;border-bottom:1px dashed var(--border);display:flex;gap:10px;align-items:baseline}
-.panel li:last-child{border-bottom:none}
-.panel li b{font-family:var(--mono);min-width:64px;color:var(--text)}
-.panel li span{color:var(--dim);font-size:12px}
+/* ===== News cards ===== */
+.calls { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 0.8rem; }
+.call { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 10px; padding: 0.9rem 1rem; border-left: 3px solid #6b7280; }
+.call.red { border-left-color: var(--danger); } .call.amber { border-left-color: var(--warning); } .call.green { border-left-color: var(--success); }
+.call .h { display: flex; gap: 8px; align-items: baseline; margin-bottom: 4px; flex-wrap: wrap; }
+.call .h b { font-family: 'Outfit', sans-serif; font-size: 0.92rem; }
+.call .h span { font-size: 0.72rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+.call p { color: var(--text-muted); font-size: 0.82rem; }
+.call p b { color: var(--text-main); }
 
-.footer{margin-top:44px;border-top:1px solid var(--border);padding-top:16px;color:var(--muted);font-size:11.3px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.footer div{max-width:760px}
-.filterbar{display:flex;gap:7px;margin-bottom:10px;flex-wrap:wrap}
-.fbtn{font-family:var(--mono);font-size:11px;color:var(--dim);background:var(--card);border:1px solid var(--border2);padding:4px 11px;border-radius:3px;cursor:pointer}
-.fbtn:hover{color:var(--text)}
-.fbtn.on{color:#0B0D10;background:var(--accent);border-color:var(--accent);font-weight:600}
-.legend{color:var(--muted);font-size:11px;margin-top:8px;line-height:1.65}
-.tick-up{animation:tu .9s ease-out}
-.tick-dn{animation:tdn .9s ease-out}
-@keyframes tu{0%{background:rgba(34,197,94,.32)}100%{background:transparent}}
-@keyframes tdn{0%{background:rgba(239,68,68,.32)}100%{background:transparent}}
-.tv-tape{margin:12px 0 0;border:1px solid var(--border);border-radius:4px;background:var(--card);overflow:hidden;min-height:46px}
+/* ===== Guide ===== */
+.guide-box { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem; }
+.guide-box h3 { font-family: 'Outfit', sans-serif; color: #fde047; font-size: 1.05rem; margin-bottom: 0.6rem; }
+.guide-box p, .guide-box li { color: #94a3b8; font-size: 0.85rem; line-height: 1.7; }
+.guide-box b { color: var(--text-main); }
+.guide-box ul { padding-left: 1.2rem; }
+
+.footer-note { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(51,65,85,.35); color: #94a3b8; font-size: 0.78rem; line-height: 1.7; }
+.footer-note b { color: #fbbf24; }
+
+@media (max-width: 900px) {
+    .top-global-nav { flex-direction: column; align-items: center; text-align: center; }
+    .tier2-hero-row { flex-direction: column; align-items: center; text-align: center; }
+    .nav-links-bar { justify-content: center; }
+    .subtitle-group { justify-content: center; }
+}
+@media (max-width: 768px) {
+    body { padding: 0.8rem; }
+    .controls { width: 100%; justify-content: center; gap: 0.6rem; }
+    th, td { padding: 0.55rem 0.5rem; font-size: 0.8rem; }
+    .brand-header h1 { font-size: 1.35rem; }
+}
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="topbar-inner">
-    <div class="brand">
-      <div class="logo">JW</div>
-      <div>
-        <h1>JERUNG WALL STREET</h1>
-        <small>US Smart Money &amp; Momentum Radar · moomoo OpenD LV3</small>
-      </div>
+<header class="dashboard-header">
+    <!-- Tier 1: Global Navigation -->
+    <div class="top-global-nav">
+        <div class="brand-header">
+            <span style="font-size: 1.45rem;">🦈</span>
+            <h1>Jerung Wall Street</h1>
+            <span class="brand-badge">US PRO</span>
+        </div>
+        <nav class="nav-links-bar">
+            <a class="nav-btn nav-btn-portal" onclick="switchTab('allmarket')">📊 US Screener</a>
+            <a class="nav-btn" onclick="switchTab('guide')">💡 Methodology</a>
+            <a class="nav-btn" onclick="switchTab('guide')">📘 SOP Guide</a>
+            <a class="nav-btn" onclick="switchTab('trackerdaily')">🏆 Hall of Fame</a>
+            <a class="nav-btn nav-btn-amber" onclick="switchTab('fresh')">🔥 Radar Formula</a>
+            <a class="nav-btn" onclick="switchTab('news')">📚 Articles &amp; Strategy</a>
+        </nav>
     </div>
-    <div class="badges">
-      <span class="badge gold">Sesi: Selasa 6 Okt 2026 · Manual</span>
-      <span class="badge">Dijana: 06 Okt 2026 · 22:21 MYT</span>
-      <span class="badge ok"><span class="dot "></span>AUTO · KEMAS KINI BERKALA</span>
-      <span class="badge" id="liveChip"><span class="dot" id="liveDot" style="background:var(--muted);box-shadow:none"></span><span id="liveTxt">TICKS — menyambung…</span></span>
+    <!-- Tier 2: Subtitle & Performance HUD -->
+    <div class="tier2-hero-row">
+        <div class="subtitle-group">
+            <div class="subtitle"><span class="pulse"></span> Live Market Scanner • Source: moomoo OpenD LV3 • Last Updated: 06 Okt 2026 · 22:37 MYT</div>
+            <div class="sentiment-badge-box">
+                <span style="color: #94a3b8;">Market Sentiment:</span>
+                <span style="color: @@SENT_COLOR@@;">@@SENTIMENT@@</span>
+            </div>
+        </div>
+        <div class="tracker-pnl-badge" onclick="switchTab('trackerdaily')" title="Klik untuk lihat Live Tracker (simulasi $2,000 notional / entry)">
+            <span style="font-size: 0.78rem; color: #cbd5e1; font-weight: 900; text-transform: uppercase; letter-spacing: 0.6px; display: inline-flex; align-items: center; gap: 0.35rem;">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 8px #34d399; display: inline-block;"></span>
+                LIVE TRACKER PNL:
+            </span>
+            <span class="font-mono" style="font-size: 1.15rem; font-weight: 900; color: #34d399;">@@TRK_PNL@@</span>
+            <span class="font-mono" style="font-size: 0.88rem; font-weight: 900; color: #fde047; white-space: nowrap;">(@@TRK_USD@@)</span>
+            <div style="display: inline-flex; gap: 0.35rem; font-size: 0.78rem; border-left: 1.5px solid rgba(255,255,255,.25); padding-left: 0.6rem; align-items: center;">
+                <span class="font-mono" style="color: #34d399; font-weight: 900; font-size: 0.78rem; padding: 0.15rem 0.45rem; background: rgba(52,211,153,.18); border: 1px solid rgba(52,211,153,.45); border-radius: 6px;">OPEN: @@TRK_OPEN@@</span>
+                <span class="font-mono" style="color: #fde047; font-weight: 900; font-size: 0.78rem; padding: 0.15rem 0.42rem; background: rgba(253,224,71,.15); border: 1px solid rgba(253,224,71,.3); border-radius: 6px;">CLOSED: @@TRK_CLOSED@@</span>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="tabs-inner" id="tabs">
-    <button class="tab on" data-t="all">📊 SEMUA</button>
-    <button class="tab" data-t="flow">🐋 MODAL BESAR</button>
-    <button class="tab" data-t="breakout">🚀 BREAKOUT &amp; MOMENTUM</button>
-    <button class="tab" data-t="div">🧲 SERAPAN</button>
-    <button class="tab" data-t="watch">📋 PANTAUAN</button>
-    <button class="tab" data-t="news">📰 BERITA &amp; FOKUS</button>
-  </div>
+    <!-- Tier 3: Controls -->
+    <div class="controls">
+        <div class="ctrl-chip"><label style="color: #60a5fa;">✨ Kumpulan:</label>
+            <select id="grpFilter">
+                <option value="ALL" selected="">All</option>
+                <option value="W">⭐ Watchlist</option>
+                <option value="SC">🎯 Screen Hits</option>
+            </select>
+        </div>
+        <div class="ctrl-chip"><label style="color: #fb7185;">⚡ Susun:</label>
+            <select id="sortByFilter">
+                <option value="SMART" selected="">🛡️ Smart</option>
+                <option value="SCORE">🏆 Skor</option>
+                <option value="RVOL">📊 RVOL</option>
+                <option value="TURNOVER">💵 Turnover</option>
+            </select>
+        </div>
+        <div class="ctrl-chip"><input type="checkbox" id="strictFilter"><label for="strictFilter" style="color: #34d399;">🔥 Ultra-Strict (Skor ≥ 85)</label></div>
+        <div class="ctrl-chip"><input type="checkbox" id="confFilter"><label for="confFilter" style="color: #60a5fa;">🎯 Confluence ≥ 2</label></div>
+        <div class="ctrl-chip"><button class="btn" style="padding: 0.35rem 0.8rem; font-size: 0.78rem;" onclick="location.reload()">🔄 Muat Semula</button></div>
+        <span class="live-chip"><span class="dot" id="liveDot"></span><span id="liveTxt">TICKS — menyambung…</span></span>
+    </div>
+</header>
+
+<div class="mkt-strip">
+    <span class="chip" data-sym="SPY"><b>SPY</b><span class="mono cprc">$779.47</span><span class="mono pos cchg">+0.60%</span></span>
+    <span class="chip" data-sym="QQQ"><b>QQQ</b><span class="mono cprc">$760.67</span><span class="mono pos cchg">+0.59%</span></span>
+    <span class="chip" data-sym="IWM"><b>IWM</b><span class="mono cprc">$282.06</span><span class="mono neg cchg">-0.47%</span></span>
+    <span class="chip" data-sym="SMH"><b>SMH</b><span class="mono cprc">$636.05</span><span class="mono pos cchg">+0.34%</span></span>
+    <span class="chip"><b>BIAS</b><span class="mono up">RISK-ON luas</span></span>
 </div>
 
-<div class="wrap">
-
-  <div class="mkt">
-    <span class="chip" data-sym="SPY"><b>SPY</b><span class="mono cprc">$779.57</span><span class="mono pos cchg">+0.61%</span></span>
-    <span class="chip" data-sym="QQQ"><b>QQQ</b><span class="mono cprc">$761.26</span><span class="mono pos cchg">+0.67%</span></span>
-    <span class="chip" data-sym="IWM"><b>IWM</b><span class="mono cprc">$282.12</span><span class="mono neg cchg">-0.44%</span></span>
-    <span class="chip" data-sym="SMH"><b>SMH</b><span class="mono cprc">$637.12</span><span class="mono pos cchg">+0.51%</span></span>
-    <span class="chip"><b>BIAS</b><span class="mono up">RISK-ON luas</span></span>
-  </div>
-
-  <div class="tv-tape">
+<div class="tv-tape">
     <div class="tradingview-widget-container">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>{"symbols":[{"proName":"AMEX:SPY","title":"SPY"},{"proName":"NASDAQ:QQQ","title":"QQQ"},{"proName":"AMEX:IWM","title":"IWM"},{"proName":"NASDAQ:SMH","title":"SMH"},{"proName":"NASDAQ:MSFT","title":"MSFT"},{"proName":"NASDAQ:NVDA","title":"NVDA"},{"proName":"NYSE:SEI","title":"SEI"},{"proName":"NASDAQ:INTC","title":"INTC"},{"proName":"NYSE:SNOW","title":"SNOW"},{"proName":"NASDAQ:NBIS","title":"NBIS"},{"proName":"NASDAQ:AMD","title":"AMD"},{"proName":"NYSE:NOW","title":"NOW"},{"proName":"NASDAQ:SPCX","title":"SPCX"},{"proName":"NASDAQ:VRNS","title":"VRNS"},{"proName":"NASDAQ:ON","title":"ON"},{"proName":"NASDAQ:NTAP","title":"NTAP"},{"proName":"NYSE:ZETA","title":"ZETA"},{"proName":"NASDAQ:TENB","title":"TENB"},{"proName":"NASDAQ:NXPI","title":"NXPI"},{"proName":"NASDAQ:SMTC","title":"SMTC"},{"proName":"NASDAQ:TXN","title":"TXN"},{"proName":"NYSE:HPE","title":"HPE"}],"showSymbolLogo":true,"colorTheme":"dark","isTransparent":true,"displayMode":"adaptive","locale":"en"}</script>
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>{"symbols":[{"proName":"AMEX:SPY","title":"SPY"},{"proName":"NASDAQ:QQQ","title":"QQQ"},{"proName":"AMEX:IWM","title":"IWM"},{"proName":"NASDAQ:SMH","title":"SMH"},{"proName":"NASDAQ:MSFT","title":"MSFT"},{"proName":"NYSE:SEI","title":"SEI"},{"proName":"NASDAQ:NVDA","title":"NVDA"},{"proName":"NASDAQ:INTC","title":"INTC"},{"proName":"NYSE:SNOW","title":"SNOW"},{"proName":"NASDAQ:NBIS","title":"NBIS"},{"proName":"NASDAQ:AMD","title":"AMD"},{"proName":"NYSE:NOW","title":"NOW"},{"proName":"NASDAQ:VRNS","title":"VRNS"},{"proName":"NASDAQ:ON","title":"ON"},{"proName":"NASDAQ:NTAP","title":"NTAP"},{"proName":"NASDAQ:TENB","title":"TENB"},{"proName":"NYSE:ZETA","title":"ZETA"},{"proName":"NASDAQ:NXPI","title":"NXPI"},{"proName":"NASDAQ:SPCX","title":"SPCX"},{"proName":"NASDAQ:TXN","title":"TXN"},{"proName":"NASDAQ:SMTC","title":"SMTC"},{"proName":"NASDAQ:GH","title":"GH"}],"showSymbolLogo":true,"colorTheme":"dark","isTransparent":true,"displayMode":"adaptive","locale":"en"}</script>
     </div>
-  </div>
+</div>
 
-  <div class="expl">
-    <h3>Jerung Wall Street — baca ini dulu (30 saat)</h3>
-    <p><b>Radar di halaman ini:</b> 🐋 <b>Modal Besar</b> = aliran order besar (institusi) · 🚀 <b>Breakout &amp; Momentum</b> = calon dekat puncak 52 minggu + volum · 🧲 <b>Serapan</b> = duit besar masuk masa harga turun · 📋 <b>Pantauan</b> · 📰 <b>Berita</b>. Guna tab di atas untuk terus ke radar.</p>
-    <p><b>Net Big</b> = belian order besar − jualan order besar untuk sesi semasa. Positif = duit besar masuk. <b>Keamatan (%)</b> = Net Big ÷ nilai dagangan — makin tinggi makin kuat.</p>
-    <p><b>Badge tindakan</b> (auto dari data): 🟢 AKUMULASI · 🧲 SERAPAN · ⭐ PANTAU · 🔴 AGIHAN · 📍 DI PUNCAK · 🚀 DEKAT PUNCAK. <b>Sokongan</b> = EMA50, <b>SL kiraan</b> = sokongan −3% (cadangan kiraan, bukan nasihat).</p>
-    <p>Dipindai: <b>225 saham AS</b> (harga $5–300, tunai ≥$20M) — semua berdata. · <b>Auto-kemas kini</b> (~15 min) + <b>harga tick masa-nyata</b> bila sesi dibuka. <b>Bukan nasihat pelaburan.</b></p>
-  </div>
+<!-- Platform description (ringkasan) -->
+<div class="platform-box">
+    <h2>Jerung Wall Street — US Smart Money &amp; Momentum Analytics</h2>
+    <span class="learn-link" onclick="switchTab('guide')">📄 Panduan Penuh ↗</span>
+    <p>Platform radar kuantitatif untuk saham AS: menggabungkan <b style="color:#e2e8f0;">aliran modal besar (capital distribution moomoo LV3)</b> dengan <b style="color:#e2e8f0;">radar teknikal</b> (Breakout, VCP, Trend, Spring, Phoenix, Bottom) untuk mengesan pengumpulan institusi &amp; momentum terbaik setiap sesi.</p>
+    <p><b style="color:#e2e8f0;">Radar utama:</b> 🦈 Whales (aliran order besar) · 🔥 Fresh Rider (dekat puncak + volum) · ⚡ Hot Theme (pemimpin sektor) · 🎯 Confluence (berbilang radar serentak) · 📅 Tracker Daily (prestasi isyarat langsung).</p>
+    <p style="font-size: 0.78rem;">Semua angka aliran dikira dari data sesi moomoo OpenD (LV3 masa nyata) dan dikemas kini automatik setiap ~15 minit semasa sesi AS. <b style="color:#fbbf24;">Bukan nasihat pelaburan.</b></p>
+</div>
 
-  <div class="kpis">
-<div class="kpi"><div class="lbl">Saham dipindai</div><div class="val mono">225</div><div class="note">Data sesi Selasa 6 Okt 2026</div></div>
-<div class="kpi g"><div class="lbl">Modal besar #1 (nilai)</div><div class="val mono up">MRVL +$38.11M</div><div class="note">+7.10% · Marvell Technology</div></div>
-<div class="kpi g"><div class="lbl">Akumulasi #1 (keamatan)</div><div class="val mono up">AES 39.8%</div><div class="note">The AES Corp</div></div>
-<div class="kpi r"><div class="lbl">Aliran keluar terbesar</div><div class="val mono down">OPCH -$13.43M</div><div class="note">+32.86% · agihan</div></div>
-<div class="kpi a"><div class="lbl">Flag risiko</div><div class="val mono warn">NBIS</div><div class="note">⚠️ insider sell-off (Form 144 $121M) — tunggu bekalan diserap</div></div>
-  </div>
+<!-- Tab Navigation -->
+<div class="tabs-nav" id="tabsNav">
+    <button class="tab-btn active" id="tab-fresh" onclick="switchTab('fresh')">🔥 Fresh Rider</button>
+    <button class="tab-btn" id="tab-hottheme" onclick="switchTab('hottheme')">⚡ Hot Theme</button>
+    <button class="tab-btn" id="tab-fusion" onclick="switchTab('fusion')">⚡ Fusion Elite</button>
+    <button class="tab-btn" id="tab-allmarket" onclick="switchTab('allmarket')">🌐 All Market</button>
+    <button class="tab-btn" id="tab-trackerdaily" onclick="switchTab('trackerdaily')">📅 Tracker Daily</button>
+    <button class="tab-btn" id="tab-whales" onclick="switchTab('whales')">🦈 Whales</button>
+    <button class="tab-btn" id="tab-confluence" onclick="switchTab('confluence')">🎯 Confluence</button>
+    <button class="tab-btn" id="tab-topgainers" onclick="switchTab('topgainers')">🚀 Gainers</button>
+    <button class="tab-btn" id="tab-vcp" onclick="switchTab('vcp')">🪜 VCP</button>
+    <button class="tab-btn" id="tab-trend" onclick="switchTab('trend')">📈 Trend</button>
+    <button class="tab-btn" id="tab-spring" onclick="switchTab('spring')">🌱 Spring</button>
+    <button class="tab-btn" id="tab-phoenix" onclick="switchTab('phoenix')">🔥 Phoenix</button>
+    <button class="tab-btn" id="tab-fishing" onclick="switchTab('fishing')">🎣 Bottom</button>
+    <button class="tab-btn" id="tab-portfolio" onclick="switchTab('portfolio')">💼 Portfolio</button>
+    <button class="tab-btn" id="tab-guide" onclick="switchTab('guide')">📖 Guide</button>
+    <button class="tab-btn" id="tab-calculator" onclick="switchTab('calculator')">🧮 Calculator</button>
+    <button class="tab-btn" id="tab-news" onclick="switchTab('news')">📰 News</button>
+</div>
 
-  <section data-g="flow">
-    <div class="sec-head"><h2><span class="tick">▮</span>🟢 MAGNET MODAL BESAR</h2><span class="sub">Dana mega masuk paling besar (nilai mutlak)</span></div>
-    <div class="heroes">
-      <div class="hero" data-sym="MRVL">
-        <div class="row1"><div><div class="tk">MRVL <span class="nm">Marvell Technology</span></div></div><div class="price"><span class="hprc">$290.50</span><br><span class="hchg up" style="font-size:12px">+7.10%</span></div></div>
-        <div class="flow">+$38.11M</div><div class="flab">Net big inflow</div>
-        <div class="bar gold"><i style="width:100%"></i></div>
-        <div class="foot"><span>Nilai dagangan: $5.8B</span><span>Relatif: 0.66%</span></div>
-      </div>
-      <div class="hero" data-sym="MSFT">
-        <div class="row1"><div><div class="tk">MSFT <span class="nm">Microsoft</span></div></div><div class="price"><span class="hprc">$535.36</span><br><span class="hchg up" style="font-size:12px">+1.94%</span></div></div>
-        <div class="flow">+$29.80M</div><div class="flab">Net big inflow</div>
-        <div class="bar gold"><i style="width:78%"></i></div>
-        <div class="foot"><span>Nilai dagangan: $2.6B</span><span>Relatif: 1.2%</span></div>
-      </div>
-      <div class="hero" data-sym="NVDA">
-        <div class="row1"><div><div class="tk">NVDA <span class="nm">NVIDIA</span></div></div><div class="price"><span class="hprc">$241.90</span><br><span class="hchg up" style="font-size:12px">+1.26%</span></div></div>
-        <div class="flow">+$17.20M</div><div class="flab">Net big inflow</div>
-        <div class="bar gold"><i style="width:45%"></i></div>
-        <div class="foot"><span>Nilai dagangan: $6.8B</span><span>Relatif: 0.25%</span></div>
-      </div>
+<!-- ============ TAB: FRESH RIDER ============ -->
+<div id="view-fresh" class="tab-content active">
+    <div class="radar-card radar-gold">
+        <div class="radar-blob" style="background: rgba(234,179,8,.15);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">🔥</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #fde047;">Fresh Rider US</h2>
+                        <span class="head-pill hp-gold">🎯 SESI: @@FR_COUNT@@ calon | SKOR MAX: @@FR_MAXSC@@ | RVOL MAX: @@FR_MAXRV@@</span>
+                    </div>
+                    <p>Stok US dalam <strong style="color:#38bdf8;">5% dari puncak 52 minggu</strong> dengan letupan volum — calon pecah tertinggi. Entry rapat (SL &lt; 5%), potensi breakout maksimum. Metrik sesi langsung.</p>
+                </div>
+            </div>
+        </div>
+        <div class="stat-strip">
+            <div class="stat-box"><div class="lbl">Calon</div><div class="val c">@@FR_COUNT@@</div></div>
+            <div class="stat-box"><div class="lbl">Skor Max</div><div class="val g">@@FR_MAXSC@@</div></div>
+            <div class="stat-box"><div class="lbl">RVOL Max</div><div class="val a">@@FR_MAXRV@@</div></div>
+            <div class="stat-box"><div class="lbl">Dekat Puncak (≤5%)</div><div class="val g">@@FR_NPK@@</div></div>
+            <div class="stat-box"><div class="lbl">Turnover Jumlah</div><div class="val">@@FR_TURN@@</div></div>
+        </div>
+        <div class="table-responsive">
+            <table class="data-table" id="tFresh">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th>
+                    <th>Saham</th>
+                    <th style="text-align:center;">Status</th>
+                    <th style="text-align:right;">Tightness</th>
+                    <th style="text-align:right;">Support Floor</th>
+                    <th style="text-align:right;">Trigger &amp; Dist</th>
+                    <th style="text-align:right;">Pullback</th>
+                    <th style="text-align:right;">Price &amp; Chg%</th>
+                    <th style="text-align:right;">Turnover</th>
+                    <th style="text-align:center;">Confluence</th>
+                    <th style="text-align:center;">Skor &amp; Tindakan</th>
+                </tr></thead>
+                <tbody>
+@@FR_ROWS@@
+                </tbody>
+            </table>
+        </div>
     </div>
-  </section>
+</div>
 
-  <section data-g="flow">
-    <div class="sec-head">
-      <h2><span class="tick">▮</span>🐋 AKUMULASI SENYAP</h2><span class="sub">Keamatan tertinggi (Net Big ÷ nilai dagangan)</span>
-      <div class="pills"><span class="pill g">Jumlah Net <b>+$52.00M</b></span><span class="pill">Keamatan max <b>39.8%</b></span><span class="pill">15 saham</span></div>
+<!-- ============ TAB: HOT THEME ============ -->
+<div id="view-hottheme" class="tab-content">
+    <div class="radar-card radar-green">
+        <div class="radar-blob" style="background: rgba(16,185,129,.12);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">⚡</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #34d399;">Hot Theme Rider</h2>
+                        <span class="head-pill hp-green">🎯 SESI: @@HOT_COUNT@@ nama</span>
+                    </div>
+                    <p>Pemimpin sektor panas US (<strong style="color:#34d399;">Semikonduktor · AI Infrastructure · Perisian · Tenaga/Solar</strong>) yang menepati berbilang radar. Aliran modal + momentum sektor.</p>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th><th>Kaunter</th><th style="text-align:center;">Sektor</th><th style="text-align:right;">Harga</th><th style="text-align:right;">Chg %</th><th style="text-align:right;">Net Big</th><th style="text-align:right;">Keamatan</th><th style="text-align:right;">Support Floor</th><th style="text-align:right;">Volatiliti</th><th style="text-align:center;">Skor &amp; Tindakan</th>
+                </tr></thead>
+                <tbody>
+@@HOT_ROWS@@
+                </tbody>
+            </table>
+        </div>
     </div>
-    <p class="radar-desc">Duit besar masuk dengan keamatan tinggi — tak kira saiz syarikat. Klik tajuk lajur untuk susun.</p>
-    <div class="tbl-wrap">
-      <table id="tAccum">
-        <thead><tr>
-          <th>No</th><th data-k="tk">Saham <span class="arr">↕</span></th><th data-k="price">Harga <span class="arr">↕</span></th><th data-k="chg">Δ% <span class="arr">↕</span></th><th data-k="net">Net Big <span class="arr">↕</span></th><th data-k="rel">Keamatan <span class="arr">↕</span></th><th>Sokongan · SL</th><th data-k="act">Tindakan</th><th>Nota</th>
-        </tr></thead>
-        <tbody>
-          <tr data-sym="AES"><td class="no">1</td><td class="tk2"><span class="t">AES</span><span class="n">The AES Corp</span></td><td class="prc">$14.93</td><td class="chg pos">+0.17%</td><td class="pos">+$11.43M</td><td><div class="rbar"><div class="track"><i style="width:100%"></i></div><span class="pct">39.8%</span></div></td><td><div class="lvl"><span class="l1">Sok $14.77</span><span class="l2"> (+1.04%) · SL $14.33</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="NTNX"><td class="no">2</td><td class="tk2"><span class="t">NTNX</span><span class="n">Nutanix</span></td><td class="prc">$73.21</td><td class="chg neg">-0.27%</td><td class="pos">+$1.81M</td><td><div class="rbar"><div class="track"><i style="width:20%"></i></div><span class="pct">7.9%</span></div></td><td><div class="lvl"><span class="l1">Sok $65.98</span><span class="l2"> (+10.96%) · SL $64.00</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="EQNR"><td class="no">3</td><td class="tk2"><span class="t">EQNR</span><span class="n">Equinor</span></td><td class="prc">$42.84</td><td class="chg pos">+1.16%</td><td class="pos">+$2.61M</td><td><div class="rbar"><div class="track"><i style="width:14%"></i></div><span class="pct">5.5%</span></div></td><td><div class="lvl"><span class="l1">Sok $41.58</span><span class="l2"> (+3.02%) · SL $40.34</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="BP"><td class="no">4</td><td class="tk2"><span class="t">BP</span><span class="n">BP PLC</span></td><td class="prc">$44.88</td><td class="chg pos">+0.58%</td><td class="pos">+$4.59M</td><td><div class="rbar"><div class="track"><i style="width:12%"></i></div><span class="pct">4.7%</span></div></td><td><div class="lvl"><span class="l1">Sok $43.71</span><span class="l2"> (+2.68%) · SL $42.40</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="PBR"><td class="no">5</td><td class="tk2"><span class="t">PBR</span><span class="n">Petroleo Brasileiro SA Petrobras</span></td><td class="prc">$23.91</td><td class="chg neg">-0.93%</td><td class="pos">+$10.54M</td><td><div class="rbar"><div class="track"><i style="width:10%"></i></div><span class="pct">4.1%</span></div></td><td><div class="lvl"><span class="l1">Sok $20.01</span><span class="l2"> (+19.49%) · SL $19.41</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="NTSK"><td class="no">6</td><td class="tk2"><span class="t">NTSK</span><span class="n">Netskope</span></td><td class="prc">$19.79</td><td class="chg pos">+7.44%</td><td class="pos">+$1.91M</td><td><div class="rbar"><div class="track"><i style="width:10%"></i></div><span class="pct">3.9%</span></div></td><td><div class="lvl"><span class="l1">Sok $15.78</span><span class="l2"> (+25.44%) · SL $15.30</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="NRG"><td class="no">7</td><td class="tk2"><span class="t">NRG</span><span class="n">NRG Energy</span></td><td class="prc">$104.27</td><td class="chg pos">+7.72%</td><td class="pos">+$3.96M</td><td><div class="rbar"><div class="track"><i style="width:8%"></i></div><span class="pct">3.2%</span></div></td><td><div class="lvl"><span class="l1">Sok $111.71</span><span class="l2"> (-6.66%) · SL $108.36</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="AZTA"><td class="no">8</td><td class="tk2"><span class="t">AZTA</span><span class="n">Azenta</span></td><td class="prc">$42.30</td><td class="chg neg">-0.99%</td><td class="pos">+$0.74M</td><td><div class="rbar"><div class="track"><i style="width:7%"></i></div><span class="pct">2.7%</span></div></td><td><div class="lvl"><span class="l1">Sok $32.87</span><span class="l2"> (+28.70%) · SL $31.89</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="CRCL"><td class="no">9</td><td class="tk2"><span class="t">CRCL</span><span class="n">Circle</span></td><td class="prc">$85.35</td><td class="chg pos">+2.46%</td><td class="pos">+$7.03M</td><td><div class="rbar"><div class="track"><i style="width:7%"></i></div><span class="pct">2.6%</span></div></td><td><div class="lvl"><span class="l1">Sok $84.57</span><span class="l2"> (+0.92%) · SL $82.03</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="BTSG"><td class="no">10</td><td class="tk2"><span class="t">BTSG</span><span class="n">BrightSpring Health Services</span></td><td class="prc">$63.75</td><td class="chg pos">+2.83%</td><td class="pos">+$0.95M</td><td><div class="rbar"><div class="track"><i style="width:6%"></i></div><span class="pct">2.5%</span></div></td><td><div class="lvl"><span class="l1">Sok $59.97</span><span class="l2"> (+6.32%) · SL $58.17</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="LW"><td class="no">11</td><td class="tk2"><span class="t">LW</span><span class="n">Lamb Weston</span></td><td class="prc">$48.97</td><td class="chg pos">+9.87%</td><td class="pos">+$2.00M</td><td><div class="rbar"><div class="track"><i style="width:6%"></i></div><span class="pct">2.4%</span></div></td><td><div class="lvl"><span class="l1">Sok $47.68</span><span class="l2"> (+2.71%) · SL $46.25</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="SEI"><td class="no">12</td><td class="tk2"><span class="t">SEI</span><span class="n">Solaris Energy Infrastructure</span></td><td class="prc">$77.93</td><td class="chg pos">+4.25%</td><td class="pos">+$0.61M</td><td><div class="rbar"><div class="track"><i style="width:6%"></i></div><span class="pct">2.4%</span></div></td><td><div class="lvl"><span class="l1">Sok $64.85</span><span class="l2"> (+20.17%) · SL $62.91</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="UUUU"><td class="no">13</td><td class="tk2"><span class="t">UUUU</span><span class="n">Energy Fuels</span></td><td class="prc">$11.44</td><td class="chg pos">+5.73%</td><td class="pos">+$0.58M</td><td><div class="rbar"><div class="track"><i style="width:5%"></i></div><span class="pct">1.9%</span></div></td><td><div class="lvl"><span class="l1">Sok $12.89</span><span class="l2"> (-11.26%) · SL $12.51</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="CCJ"><td class="no">14</td><td class="tk2"><span class="t">CCJ</span><span class="n">Cameco</span></td><td class="prc">$91.97</td><td class="chg pos">+5.15%</td><td class="pos">+$2.55M</td><td><div class="rbar"><div class="track"><i style="width:5%"></i></div><span class="pct">1.8%</span></div></td><td><div class="lvl"><span class="l1">Sok $94.10</span><span class="l2"> (-2.26%) · SL $91.28</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="ELAN"><td class="no">15</td><td class="tk2"><span class="t">ELAN</span><span class="n">Elanco Animal Health</span></td><td class="prc">$22.35</td><td class="chg neg">-0.71%</td><td class="pos">+$0.68M</td><td><div class="rbar"><div class="track"><i style="width:5%"></i></div><span class="pct">1.8%</span></div></td><td><div class="lvl"><span class="l1">Sok $23.33</span><span class="l2"> (-4.21%) · SL $22.63</span></div></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="legend">Bar = keamatan relatif (skala 39.8% = penuh). Sumber: moomoo capital distribution. Badge: 🟢 AKUMULASI (inflow · keamatan ≥1.5%) · 🧲 SERAPAN (inflow · harga rata/turun) · ⭐ PANTAU · 🔴 AGIHAN. Sokongan = EMA50 · SL kiraan = sokongan −3% (cadangan kiraan, bukan nasihat).</div>
-  </section>
+</div>
 
-  <section data-g="breakout">
-    <div class="sec-head">
-      <h2><span class="tick">▮</span>🚀 BREAKOUT &amp; MOMENTUM</h2><span class="sub">Calon hampir puncak 52 minggu / volum menaik</span>
-      <div class="pills"><span class="pill">12 calon</span><span class="pill g">RVOL max <b>7.4x</b></span><span class="pill a">Dekat puncak <b>12</b></span></div>
+<!-- ============ TAB: FUSION ELITE ============ -->
+<div id="view-fusion" class="tab-content">
+    <div class="radar-card radar-purple">
+        <div class="radar-blob" style="background: rgba(168,85,247,.12);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">⚡</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #c4b5fd;">Fusion Elite</h2>
+                        <span class="head-pill hp-purple">🎯 3+ RADAR SERENTAK</span>
+                    </div>
+                    <p>Nama yang lulus <strong style="color:#c4b5fd;">3 model radar atau lebih serentak</strong> (volum · breakout · puncak 52M · trend) — konfluens tertinggi sesi.</p>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th><th>Kaunter</th><th style="text-align:center;">Radar Lulus</th><th style="text-align:right;">Harga</th><th style="text-align:right;">Chg %</th><th style="text-align:right;">Net Big</th><th style="text-align:right;">RVOL</th><th style="text-align:right;">Support Floor</th><th style="text-align:center;">Skor &amp; Tindakan</th>
+                </tr></thead>
+                <tbody>
+@@FUSION_ROWS@@
+                </tbody>
+            </table>
+        </div>
     </div>
-    <p class="radar-desc">Senarai pendek dari saringan volum + puncak 52 minggu + trend. Setiap baris lengkap dengan sokongan, SL kiraan dan skor.</p>
-    <div class="tbl-wrap">
-      <table id="tBreak">
-        <thead><tr>
-          <th>No</th><th data-k="tk">Saham <span class="arr">↕</span></th><th data-k="price">Harga <span class="arr">↕</span></th><th data-k="chg">Δ% <span class="arr">↕</span></th><th data-k="rvol">RVOL <span class="arr">↕</span></th><th data-k="d52">Jarak 52W <span class="arr">↕</span></th><th data-k="emad">ΔEMA20 <span class="arr">↕</span></th><th data-k="vol">Volatiliti <span class="arr">↕</span></th><th>Sokongan · SL</th><th data-k="sc">Skor <span class="arr">↕</span></th><th data-k="act">Tindakan</th>
-        </tr></thead>
-        <tbody>
-<tr data-sym="TECH"><td class="no">1</td><td class="tk2"><span class="t">TECH</span><span class="n">Bio-Techne</span></td><td class="prc">$72.47</td><td class="chg neg">-0.16%</td><td>3.00x</td><td class="up">-0.31%</td><td class="pos">+0.1%</td><td>0.2%</td><td><div class="lvl"><span class="l1">Sok $71.19</span><span class="l2"> (+1.79%) · SL $69.06</span></div></td><td><span class="sc hi">99</span><span class="neut">/100</span></td><td><span class="ab g">📍 DI PUNCAK</span></td></tr>
-<tr data-sym="CRWD"><td class="no">2</td><td class="tk2"><span class="t">CRWD</span><span class="n">CrowdStrike</span></td><td class="prc">$282.30</td><td class="chg pos">+3.53%</td><td>3.35x</td><td class="up">-1.48%</td><td class="pos">+11.9%</td><td>4.0%</td><td><div class="lvl"><span class="l1">Sok $228.51</span><span class="l2"> (+23.54%) · SL $221.66</span></div></td><td><span class="sc hi">94</span><span class="neut">/100</span></td><td><span class="ab g">📍 DI PUNCAK</span></td></tr>
-<tr data-sym="FTNT"><td class="no">3</td><td class="tk2"><span class="t">FTNT</span><span class="n">Fortinet</span></td><td class="prc">$188.90</td><td class="chg pos">+2.59%</td><td>2.97x</td><td class="up">-1.63%</td><td class="pos">+7.9%</td><td>3.2%</td><td><div class="lvl"><span class="l1">Sok $166.00</span><span class="l2"> (+13.79%) · SL $161.02</span></div></td><td><span class="sc hi">93</span><span class="neut">/100</span></td><td><span class="ab g">🚀 DEKAT PUNCAK</span></td></tr>
-<tr data-sym="S"><td class="no">4</td><td class="tk2"><span class="t">S</span><span class="n">SentinelOne</span></td><td class="prc">$25.81</td><td class="chg pos">+1.49%</td><td>2.90x</td><td class="up">-1.75%</td><td class="pos">+10.1%</td><td>4.0%</td><td><div class="lvl"><span class="l1">Sok $21.81</span><span class="l2"> (+18.33%) · SL $21.16</span></div></td><td><span class="sc hi">92</span><span class="neut">/100</span></td><td><span class="ab g">🚀 DEKAT PUNCAK</span></td></tr>
-<tr data-sym="FRSH"><td class="no">5</td><td class="tk2"><span class="t">FRSH</span><span class="n">Freshworks</span></td><td class="prc">$13.99</td><td class="chg pos">+5.86%</td><td>7.38x</td><td class="up">-2.61%</td><td class="pos">+9.0%</td><td>5.0%</td><td><div class="lvl"><span class="l1">Sok $12.33</span><span class="l2"> (+13.53%) · SL $11.96</span></div></td><td><span class="sc hi">90</span><span class="neut">/100</span></td><td><span class="ab g">🚀 DEKAT PUNCAK</span></td></tr>
-<tr data-sym="PBR"><td class="no">6</td><td class="tk2"><span class="t">PBR</span><span class="n">Petroleo Brasileiro SA Petrobras</span></td><td class="prc">$23.91</td><td class="chg neg">-0.93%</td><td>2.84x</td><td class="up">-3.33%</td><td class="pos">+12.5%</td><td>1.0%</td><td><div class="lvl"><span class="l1">Sok $20.01</span><span class="l2"> (+19.49%) · SL $19.41</span></div></td><td><span class="sc hi">85</span><span class="neut">/100</span></td><td><span class="ab g">🚀 DEKAT PUNCAK</span></td></tr>
-<tr data-sym="NVDA"><td class="no">7</td><td class="tk2"><span class="t">NVDA</span><span class="n">NVIDIA</span></td><td class="prc">$241.90</td><td class="chg pos">+1.26%</td><td>1.93x</td><td class="up">-0.49%</td><td class="pos">+6.2%</td><td>1.1%</td><td><div class="lvl"><span class="l1">Sok $220.97</span><span class="l2"> (+9.47%) · SL $214.34</span></div></td><td><span class="sc hi">84</span><span class="neut">/100</span></td><td><span class="ab g">📍 DI PUNCAK</span></td></tr>
-<tr data-sym="OKTA"><td class="no">8</td><td class="tk2"><span class="t">OKTA</span><span class="n">Okta</span></td><td class="prc">$219.23</td><td class="chg pos">+0.43%</td><td>2.54x</td><td class="up">-2.84%</td><td class="pos">+11.2%</td><td>3.3%</td><td><div class="lvl"><span class="l1">Sok $174.43</span><span class="l2"> (+25.69%) · SL $169.19</span></div></td><td><span class="sc hi">82</span><span class="neut">/100</span></td><td><span class="ab g">🚀 DEKAT PUNCAK</span></td></tr>
-<tr data-sym="ANET"><td class="no">9</td><td class="tk2"><span class="t">ANET</span><span class="n">Arista Networks</span></td><td class="prc">$211.49</td><td class="chg pos">+2.22%</td><td>2.04x</td><td class="up">-1.58%</td><td class="pos">+4.5%</td><td>2.3%</td><td><div class="lvl"><span class="l1">Sok $194.26</span><span class="l2"> (+8.87%) · SL $188.43</span></div></td><td><span class="sc hi">81</span><span class="neut">/100</span></td><td><span class="ab g">🚀 DEKAT PUNCAK</span></td></tr>
-<tr data-sym="XP"><td class="no">10</td><td class="tk2"><span class="t">XP</span><span class="n">XP Inc</span></td><td class="prc">$28.98</td><td class="chg pos">+2.93%</td><td>1.94x</td><td class="up">-1.84%</td><td class="pos">+33.5%</td><td>3.3%</td><td><div class="lvl"><span class="l1">Sok $19.66</span><span class="l2"> (+47.38%) · SL $19.07</span></div></td><td><span class="sc hi">79</span><span class="neut">/100</span></td><td><span class="ab g">🚀 DEKAT PUNCAK</span></td></tr>
-<tr data-sym="SKHY"><td class="no">11</td><td class="tk2"><span class="t">SKHY</span><span class="n">SK hynix</span></td><td class="prc">$190.59</td><td class="chg neg">-2.27%</td><td>2.74x</td><td class="up">-4.61%</td><td class="pos">+2.7%</td><td>1.8%</td><td><div class="lvl"><span class="l1">Sok $175.93</span><span class="l2"> (+8.33%) · SL $170.66</span></div></td><td><span class="sc hi">78</span><span class="neut">/100</span></td><td><span class="ab g">🚀 DEKAT PUNCAK</span></td></tr>
-<tr data-sym="DT"><td class="no">12</td><td class="tk2"><span class="t">DT</span><span class="n">Dynatrace</span></td><td class="prc">$60.88</td><td class="chg pos">+1.11%</td><td>1.50x</td><td class="up">-1.10%</td><td class="pos">+7.0%</td><td>1.6%</td><td><div class="lvl"><span class="l1">Sok $52.87</span><span class="l2"> (+15.14%) · SL $51.29</span></div></td><td><span class="sc hi">76</span><span class="neut">/100</span></td><td><span class="ab g">📍 DI PUNCAK</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="legend">Skor /100 = 40% RVOL + 40% kedekatan puncak 52 minggu + 20% trend (harga > EMA20). Jarak 52W = jarak harga ke puncak 52 minggu (0.00% = di puncak). Volatiliti = julat hari (tinggi−rendah) ÷ penutup sebelumnya. Sokongan = EMA50 · SL kiraan = sokongan −3%. Badge deskriptif dari data — bukan ramalan.</div>
-  </section>
+</div>
 
-  <section data-g="div">
-    <div class="sec-head"><h2><span class="tick">▮</span>🧲 SERAPAN</h2><span class="sub">Modal besar masuk masa harga turun/flat — penyerapan</span></div>
-    <div class="calls">
-      <div class="call amber"><div class="h"><b>MRNA · Moderna</b><span>+$13.52M · -7.28% · $188.41</span></div><p>Modal besar masuk walaupun harga turun/flat — penyerapan (serapan).</p></div>
-      <div class="call amber"><div class="h"><b>PBR · Petroleo Brasileiro SA Petrobras</b><span>+$10.54M · -0.93% · $23.91</span></div><p>Modal besar masuk walaupun harga turun/flat — penyerapan (serapan).</p></div>
-      <div class="call amber"><div class="h"><b>TEM · Tempus AI</b><span>+$1.39M · -7.58% · $77.22</span></div><p>Modal besar masuk walaupun harga turun/flat — penyerapan (serapan).</p></div>
-      <div class="call amber"><div class="h"><b>AXTI · AXT Inc</b><span>+$1.08M · -1.68% · $85.20</span></div><p>Modal besar masuk walaupun harga turun/flat — penyerapan (serapan).</p></div>
+<!-- ============ TAB: ALL MARKET ============ -->
+<div id="view-allmarket" class="tab-content">
+    <div class="radar-card radar-cyan">
+        <div class="radar-blob" style="background: rgba(6,182,212,.12);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">🌐</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #22d3ee;">All Market Scan</h2>
+                        <span class="head-pill hp-cyan">🎯 @@ALL_COUNT@@ saham · data sesi Selasa 6 Okt 2026 (LIVE)</span>
+                    </div>
+                    <p>Keseluruhan universe saringan (harga $5–300, tunai ≥$20M) dengan aliran modal besar, sokongan EMA50 dan badge tindakan.</p>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="data-table" id="tAll">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th><th class="sortable">Kaunter</th><th class="sortable" style="text-align:right;">Harga</th><th class="sortable" style="text-align:right;">Chg %</th><th class="sortable" style="text-align:right;">Net Big</th><th class="sortable" style="text-align:right;">Keamatan</th><th style="text-align:right;">Support Floor</th><th style="text-align:center;">Tindakan</th><th>Nota</th>
+                </tr></thead>
+                <tbody>
+@@ALL_ROWS@@
+                </tbody>
+            </table>
+        </div>
     </div>
-  </section>
+</div>
 
-  <section data-g="flow">
-    <div class="sec-head"><h2><span class="tick">▮</span>🔴 ALIRAN KELUAR</h2><span class="sub">Duit besar tinggalkan — elak / hati-hati</span><div class="pills"><span class="pill r">Keluar <b>-$38.94M</b></span><span class="pill">5 saham</span></div></div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>Ticker</th><th>Nama</th><th>Harga</th><th>Δ%</th><th>Net Big</th><th>Nota</th></tr></thead>
-        <tbody>
-          <tr data-sym="OPCH"><td class="tk">OPCH</td><td class="nm">Option Care Health</td><td class="prc">$31.05</td><td class="chg pos">+32.86%</td><td class="neg">-$13.43M</td><td class="note"></td></tr>
-          <tr data-sym="PTC"><td class="tk">PTC</td><td class="nm">PTC Inc</td><td class="prc">$193.23</td><td class="chg pos">+0.50%</td><td class="neg">-$8.88M</td><td class="note">buyout — permainan arb, bukan swing</td></tr>
-          <tr data-sym="INTC"><td class="tk">INTC</td><td class="nm">Intel</td><td class="prc">$115.75</td><td class="chg neg">-0.38%</td><td class="neg">-$7.72M</td><td class="note flag">⚠️ agihan besar — elak</td></tr>
-          <tr data-sym="SNOW"><td class="tk">SNOW</td><td class="nm">Snowflake</td><td class="prc">$341.63</td><td class="chg pos">+0.78%</td><td class="neg">-$4.77M</td><td class="note">insider jual — dipantau</td></tr>
-          <tr data-sym="BE"><td class="tk">BE</td><td class="nm">Bloom Energy</td><td class="prc">$294.36</td><td class="chg pos">+2.69%</td><td class="neg">-$4.14M</td><td class="note"></td></tr>
-        </tbody>
-      </table>
+<!-- ============ TAB: TRACKER DAILY ============ -->
+<div id="view-trackerdaily" class="tab-content">
+    <div class="radar-card radar-green">
+        <div class="radar-blob" style="background: rgba(16,185,129,.12);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">📅</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #34d399;">Live Tracker (Isyarat Sebenar)</h2>
+                        <span class="head-pill hp-green">MULA: @@TRK_START@@</span>
+                    </div>
+                    <p>Setiap isyarat radar teratas (Fresh Rider skor ≥75, Whales keamatan ≥2%) dilog secara automatik dan dijejak harga sebenar sehingga SL dilepasi. Simulasi $2,000 notional / posisi. <strong style="color:#fbbf24;">Prestasi sebenar — bukan backtest.</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="stat-strip">
+            <div class="stat-box"><div class="lbl">Open</div><div class="val c">@@TRK_OPEN_N@@</div></div>
+            <div class="stat-box"><div class="lbl">Closed</div><div class="val">@@TRK_CLOSED_N@@</div></div>
+            <div class="stat-box"><div class="lbl">Pulangan Terkini (Σ)</div><div class="val g">@@TRK_SUMRET@@</div></div>
+            <div class="stat-box"><div class="lbl">Kadar Menang</div><div class="val g">@@TRK_WR@@</div></div>
+            <div class="stat-box"><div class="lbl">Pulangan Tutup (Σ)</div><div class="val a">@@TRK_REAL@@</div></div>
+            <div class="stat-box"><div class="lbl">Net P&amp;L ($2k notional)</div><div class="val g">@@TRK_NET@@</div></div>
+        </div>
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th><th>Kaunter</th><th style="text-align:center;">Status</th><th style="text-align:center;">Radar</th><th style="text-align:center;">Tarikh Entry</th><th style="text-align:right;">Harga Entry</th><th style="text-align:right;">Harga Semasa</th><th style="text-align:right;">Pulangan</th><th style="text-align:right;">Max Gain</th><th style="text-align:center;">Hari</th><th style="text-align:right;">SL</th><th style="text-align:right;">Trailing SL</th>
+                </tr></thead>
+                <tbody>
+@@TRK_ROWS@@
+                </tbody>
+            </table>
+        </div>
     </div>
-  </section>
+</div>
 
-  <section data-g="watch">
-    <div class="sec-head">
-      <h2><span class="tick">▮</span>📋 SENARAI PANTAUAN (18)</h2><span class="sub">Watchlist + pilihan + blue-chip</span>
-      <div class="pills"><span class="pill g">Net + <b>12</b></span><span class="pill r">Net − <b>6</b></span></div>
+<!-- ============ TAB: WHALES ============ -->
+<div id="view-whales" class="tab-content">
+    <div class="radar-card radar-gold">
+        <div class="radar-blob" style="background: rgba(234,179,8,.15);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">🦈</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #fde047;">Whale Radar — Aliran Order Besar</h2>
+                        <span class="head-pill hp-gold">🎯 NET BESAR: @@WH_NET@@ | KEMATAN MAX: @@WH_RATIO@@</span>
+                    </div>
+                    <p>Aliran belian order besar (institusi) − jualan, dari <strong style="color:#fde047;">capital distribution moomoo LV3</strong>. Positif = duit besar masuk. Keamatan = Net Big ÷ nilai dagangan.</p>
+                </div>
+            </div>
+        </div>
+        <div class="cards-grid">
+@@WH_CARDS@@
+        </div>
+        <h3 style="font-family: 'Outfit'; font-size: 1rem; color: #fde047; margin: 0.4rem 0 0.8rem; text-transform: uppercase; letter-spacing: .5px;">🟢 Akumulasi Senyap — Keamatan Tertinggi</h3>
+        <div class="table-responsive">
+            <table class="data-table" id="tWhale">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th><th class="sortable">Kaunter</th><th class="sortable" style="text-align:right;">Harga</th><th class="sortable" style="text-align:right;">Chg %</th><th class="sortable" style="text-align:right;">Net Big</th><th class="sortable" style="text-align:right;">Keamatan</th><th style="text-align:right;">Support Floor</th><th style="text-align:center;">Tindakan</th><th>Nota</th>
+                </tr></thead>
+                <tbody>
+@@WH_ACCUM_ROWS@@
+                </tbody>
+            </table>
+        </div>
+        <h3 style="font-family: 'Outfit'; font-size: 1rem; color: #fb7185; margin: 1rem 0 0.8rem; text-transform: uppercase; letter-spacing: .5px;">🔴 Aliran Keluar — Duit Besar Tinggalkan</h3>
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th><th>Kaunter</th><th>Nama</th><th style="text-align:right;">Harga</th><th style="text-align:right;">Chg %</th><th style="text-align:right;">Net Big</th><th>Nota</th>
+                </tr></thead>
+                <tbody>
+@@WH_OUTFLOW_ROWS@@
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="filterbar">
-      <button class="fbtn on" data-f="all">SEMUA</button>
-      <button class="fbtn" data-f="pos">🟢 NET POSITIF</button>
-      <button class="fbtn" data-f="neg">🔴 NET NEGATIF</button>
-      <button class="fbtn" data-f="w">⭐ WATCHLIST</button>
-    </div>
-    <div class="tbl-wrap">
-      <table id="tWatch">
-        <thead><tr>
-          <th data-k="tk">Ticker <span class="arr">↕</span></th><th data-k="nm">Nama</th><th data-k="price">Harga <span class="arr">↕</span></th><th data-k="chg">Δ% <span class="arr">↕</span></th><th data-k="net">Net Big <span class="arr">↕</span></th><th data-k="rel">Keamatan <span class="arr">↕</span></th><th>Sokongan · SL</th><th>Kumpulan</th><th data-k="act">Tindakan</th><th>Nota</th>
-        </tr></thead>
-        <tbody>
-          <tr data-sym="MSFT" data-grp="w" data-sign="pos"><td class="tk">MSFT</td><td class="nm">Microsoft</td><td class="prc">$535.36</td><td class="chg pos">+1.94%</td><td class="pos">+$29.80M</td><td><span class="pos">1.2%</span></td><td><span class="neut">—</span></td><td><span class="tag w">Watchlist</span></td><td><span class="ab n">⭐ PANTAU</span></td><td class="note"></td></tr>
-          <tr data-sym="NBIS" data-grp="w" data-sign="pos"><td class="tk">NBIS</td><td class="nm">NEBIUS</td><td class="prc">$247.27</td><td class="chg pos">+6.32%</td><td class="pos">+$14.87M</td><td><span class="pos">0.88%</span></td><td><div class="lvl"><span class="l1">Sok $224.18</span><span class="l2"> (+10.30%) · SL $217.46</span></div></td><td><span class="tag w">Watchlist</span></td><td><span class="ab n">⭐ PANTAU</span></td><td class="note flag">⚠️ insider sell-off (Form 144 $121M) — tunggu bekalan diserap</td></tr>
-          <tr data-sym="AMD" data-grp="b" data-sign="pos"><td class="tk">AMD</td><td class="nm">Advanced Micro Devices</td><td class="prc">$646.16</td><td class="chg pos">+2.28%</td><td class="pos">+$13.49M</td><td><span class="pos">0.28%</span></td><td><span class="neut">—</span></td><td><span class="tag b">Blue-chip</span></td><td><span class="ab n">⭐ PANTAU</span></td><td class="note"></td></tr>
-          <tr data-sym="NOW" data-grp="b" data-sign="pos"><td class="tk">NOW</td><td class="nm">ServiceNow</td><td class="prc">$138.40</td><td class="chg pos">+1.70%</td><td class="pos">+$3.30M</td><td><span class="pos">1.0%</span></td><td><span class="neut">—</span></td><td><span class="tag b">Blue-chip</span></td><td><span class="ab n">⭐ PANTAU</span></td><td class="note"></td></tr>
-          <tr data-sym="SPCX" data-grp="p" data-sign="pos"><td class="tk">SPCX</td><td class="nm">SpaceX</td><td class="prc">$174.65</td><td class="chg pos">+2.08%</td><td class="pos">+$3.22M</td><td><span class="pos">0.04%</span></td><td><div class="lvl"><span class="l1">Sok $147.65</span><span class="l2"> (+18.28%) · SL $143.22</span></div></td><td><span class="tag p">Pilihan</span></td><td><span class="ab n">⭐ PANTAU</span></td><td class="note">pantau risiko lockup expiry</td></tr>
-          <tr data-sym="VRNS" data-grp="w" data-sign="pos"><td class="tk">VRNS</td><td class="nm">Varonis Systems</td><td class="prc">$48.92</td><td class="chg pos">+1.61%</td><td class="pos">+$0.73M</td><td><span class="pos">5.7%</span></td><td><div class="lvl"><span class="l1">Sok $45.05</span><span class="l2"> (+8.61%) · SL $43.69</span></div></td><td><span class="tag w">Watchlist</span></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note">Wedbush downgrade (Neutral) — hati</td></tr>
-          <tr data-sym="SEI" data-grp="p" data-sign="pos"><td class="tk">SEI</td><td class="nm">Solaris Energy Infrastructure</td><td class="prc">$77.93</td><td class="chg pos">+4.25%</td><td class="pos">+$0.61M</td><td><span class="pos">2.4%</span></td><td><div class="lvl"><span class="l1">Sok $64.85</span><span class="l2"> (+20.17%) · SL $62.91</span></div></td><td><span class="tag p">Pilihan</span></td><td><span class="ab g">🟢 AKUMULASI</span></td><td class="note"></td></tr>
-          <tr data-sym="ON" data-grp="p" data-sign="pos"><td class="tk">ON</td><td class="nm">ON Semiconductor</td><td class="prc">$85.91</td><td class="chg neg">-0.02%</td><td class="pos">+$0.58M</td><td><span class="pos">0.55%</span></td><td><span class="neut">—</span></td><td><span class="tag p">Pilihan</span></td><td><span class="ab a">🧲 SERAPAN</span></td><td class="note"></td></tr>
-          <tr data-sym="NTAP" data-grp="p" data-sign="pos"><td class="tk">NTAP</td><td class="nm">NetApp</td><td class="prc">$228.72</td><td class="chg pos">+2.21%</td><td class="pos">+$0.22M</td><td><span class="pos">0.27%</span></td><td><div class="lvl"><span class="l1">Sok $193.11</span><span class="l2"> (+18.44%) · SL $187.32</span></div></td><td><span class="tag p">Pilihan</span></td><td><span class="ab n">⭐ PANTAU</span></td><td class="note">sudah extended + aliran keluar</td></tr>
-          <tr data-sym="ZETA" data-grp="w" data-sign="pos"><td class="tk">ZETA</td><td class="nm">Zeta Global</td><td class="prc">$33.35</td><td class="chg pos">+1.43%</td><td class="pos">+$0.12M</td><td><span class="pos">0.29%</span></td><td><div class="lvl"><span class="l1">Sok $28.76</span><span class="l2"> (+15.96%) · SL $27.90</span></div></td><td><span class="tag w">Watchlist</span></td><td><span class="ab n">⭐ PANTAU</span></td><td class="note"></td></tr>
-          <tr data-sym="TENB" data-grp="w" data-sign="pos"><td class="tk">TENB</td><td class="nm">Tenable Holdings</td><td class="prc">$39.19</td><td class="chg pos">+1.77%</td><td class="pos">+$0.08M</td><td><span class="pos">0.56%</span></td><td><div class="lvl"><span class="l1">Sok $35.11</span><span class="l2"> (+11.61%) · SL $34.06</span></div></td><td><span class="tag w">Watchlist</span></td><td><span class="ab n">⭐ PANTAU</span></td><td class="note"></td></tr>
-          <tr data-sym="NXPI" data-grp="w" data-sign="pos"><td class="tk">NXPI</td><td class="nm">NXP Semiconductors</td><td class="prc">$244.13</td><td class="chg pos">+0.89%</td><td class="pos">+$0.01M</td><td><span class="pos">0.03%</span></td><td><span class="neut">—</span></td><td><span class="tag w">Watchlist</span></td><td><span class="ab n">⭐ PANTAU</span></td><td class="note"></td></tr>
-          <tr data-sym="SMTC" data-grp="p" data-sign="neg"><td class="tk">SMTC</td><td class="nm">Semtech</td><td class="prc">$196.40</td><td class="chg pos">+1.85%</td><td class="neg">-$0.64M</td><td><span class="neg">-0.64%</span></td><td><div class="lvl"><span class="l1">Sok $158.33</span><span class="l2"> (+24.04%) · SL $153.58</span></div></td><td><span class="tag p">Pilihan</span></td><td><span class="ab r">🔴 AGIHAN</span></td><td class="note"></td></tr>
-          <tr data-sym="TXN" data-grp="p" data-sign="neg"><td class="tk">TXN</td><td class="nm">Texas Instruments</td><td class="prc">$294.97</td><td class="chg pos">+0.02%</td><td class="neg">-$0.65M</td><td><span class="neg">-0.42%</span></td><td><span class="neut">—</span></td><td><span class="tag p">Pilihan</span></td><td><span class="ab r">🔴 AGIHAN</span></td><td class="note">aliran keluar — elak sementara</td></tr>
-          <tr data-sym="HPE" data-grp="p" data-sign="neg"><td class="tk">HPE</td><td class="nm">Hewlett Packard Enterprise</td><td class="prc">$70.09</td><td class="chg pos">+2.54%</td><td class="neg">-$1.17M</td><td><span class="neg">-0.51%</span></td><td><div class="lvl"><span class="l1">Sok $57.12</span><span class="l2"> (+22.73%) · SL $55.40</span></div></td><td><span class="tag p">Pilihan</span></td><td><span class="ab r">🔴 AGIHAN</span></td><td class="note"></td></tr>
-          <tr data-sym="GH" data-grp="w" data-sign="neg"><td class="tk">GH</td><td class="nm">Guardant Health</td><td class="prc">$177.16</td><td class="chg neg">-5.37%</td><td class="neg">-$1.60M</td><td><span class="neg">-1.2%</span></td><td><div class="lvl"><span class="l1">Sok $166.51</span><span class="l2"> (+6.40%) · SL $161.51</span></div></td><td><span class="tag w">Watchlist</span></td><td><span class="ab r">🔴 AGIHAN</span></td><td class="note">momentum + Guggenheim PT $200</td></tr>
-          <tr data-sym="SNOW" data-grp="w" data-sign="neg"><td class="tk">SNOW</td><td class="nm">Snowflake</td><td class="prc">$341.63</td><td class="chg pos">+0.78%</td><td class="neg">-$4.77M</td><td><span class="neg">-1.3%</span></td><td><span class="neut">—</span></td><td><span class="tag w">Watchlist</span></td><td><span class="ab r">🔴 AGIHAN</span></td><td class="note">insider jual — dipantau</td></tr>
-          <tr data-sym="INTC" data-grp="b" data-sign="neg"><td class="tk">INTC</td><td class="nm">Intel</td><td class="prc">$115.75</td><td class="chg neg">-0.38%</td><td class="neg">-$7.72M</td><td><span class="neg">-0.33%</span></td><td><span class="neut">—</span></td><td><span class="tag b">Blue-chip</span></td><td><span class="ab r">🔴 AGIHAN</span></td><td class="note flag">⚠️ agihan besar — elak</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="legend">Keamatan = Net Big ÷ nilai dagangan · Sokongan = EMA50, SL kiraan = sokongan −3% · klik tajuk lajur untuk susun. Nota ⚠️ = anotasi manual, disemak berkala.</div>
-  </section>
+</div>
 
-  <section data-g="news">
-    <div class="sec-head"><h2><span class="tick">▮</span>📰 BERITA &amp; AMARAN</h2><span class="sub">Auto: 3 tajuk terkini setiap nama utama (moomoo) — klik segar setiap ~15 min</span></div>
-    <div class="calls">
+<!-- ============ TAB: CONFLUENCE ============ -->
+<div id="view-confluence" class="tab-content">
+    <div class="radar-card radar-cyan">
+        <div class="radar-blob" style="background: rgba(6,182,212,.12);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">🎯</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #22d3ee;">Confluence Radar</h2>
+                        <span class="head-pill hp-cyan">🎯 @@CONF_COUNT@@ NAMA · 2+ RADAR</span>
+                    </div>
+                    <p>Saham yang disahkan oleh <strong style="color:#22d3ee;">2 radar atau lebih serentak</strong> (Volum Surge · Breakout · Puncak 52M · Trend) + aliran modal besar.</p>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th><th>Kaunter</th><th style="text-align:center;">Radar Lulus</th><th style="text-align:right;">Harga</th><th style="text-align:right;">Chg %</th><th style="text-align:right;">Net Big</th><th style="text-align:right;">Keamatan</th><th style="text-align:right;">Support Floor</th><th style="text-align:center;">Skor &amp; Tindakan</th>
+                </tr></thead>
+                <tbody>
+@@CONF_ROWS@@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ============ TAB: GAINERS ============ -->
+<div id="view-topgainers" class="tab-content">
+    <div class="radar-card radar-green">
+        <div class="radar-blob" style="background: rgba(16,185,129,.12);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">🚀</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #34d399;">Top Gainers Sesi</h2>
+                        <span class="head-pill hp-green">🎯 HARI INI</span>
+                    </div>
+                    <p>Peningkatan terbesar sesi semasa (turnover ≥$20M) dengan aliran modal &amp; RVOL untuk semakan kualiti pergerakan.</p>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th><th>Kaunter</th><th style="text-align:right;">Harga</th><th style="text-align:right;">Chg %</th><th style="text-align:right;">RVOL</th><th style="text-align:right;">Net Big</th><th style="text-align:right;">Turnover</th><th style="text-align:center;">Tindakan</th>
+                </tr></thead>
+                <tbody>
+@@GAIN_ROWS@@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ============ TAB: VCP ============ -->
+<div id="view-vcp" class="tab-content">
+    <div class="radar-card radar-cyan">
+        <div class="radar-blob" style="background: rgba(6,182,212,.15);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">🪜</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #22d3ee;">VCP Staircase + Trend Radar</h2>
+                        <span class="head-pill hp-cyan">🧊 KONTRAKSI RAPI (@@VCP_COUNT@@ CALON)</span>
+                    </div>
+                    <p>Kontraksi volatiliti (Minervini-style): saham dalam <strong style="color:#22d3ee;">5% dari puncak 52M</strong> dengan julat harian rapi + harga &gt; EMA20/EMA50 — asas "staircase" sebelum pecah. SL ultra-rapat (≤3-5%).</p>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th><th>Kaunter</th><th style="text-align:center;">Kategori Setup</th><th style="text-align:right;">Current Price</th><th style="text-align:right;">Change %</th><th style="text-align:right;">Support Floor Price</th><th style="text-align:right;">Floor Distance</th><th style="text-align:right;">Volatiliti</th><th style="text-align:right;">Stop Loss (SL)</th><th style="text-align:right;">Turnover</th><th style="text-align:center;">Analisis AI (Skor)</th>
+                </tr></thead>
+                <tbody>
+@@VCP_ROWS@@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ============ TAB: TREND ============ -->
+<div id="view-trend" class="tab-content">
+    <div class="radar-card radar-green">
+        <div class="radar-blob" style="background: rgba(16,185,129,.12);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">📈</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #34d399;">Trend Rider</h2>
+                        <span class="head-pill hp-green">🎯 TREND SIMPAN (EMA20 &gt; EMA50)</span>
+                    </div>
+                    <p>Saham yang lulus saringan <strong style="color:#34d399;">Trend Following</strong> — struktur naik teratur dengan sokongan aliran modal besar.</p>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th><th>Kaunter</th><th style="text-align:right;">Harga</th><th style="text-align:right;">Chg %</th><th style="text-align:right;">ΔEMA20%</th><th style="text-align:right;">ΔEMA50%</th><th style="text-align:right;">Net Big</th><th style="text-align:right;">Support Floor</th><th style="text-align:center;">Tindakan</th>
+                </tr></thead>
+                <tbody>
+@@TREND_ROWS@@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ============ TAB: SPRING ============ -->
+<div id="view-spring" class="tab-content">
+    <div class="radar-card radar-gold">
+        <div class="radar-blob" style="background: rgba(245,158,11,.12);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">🌱</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #fbbf24;">Spring / Serapan</h2>
+                        <span class="head-pill hp-gold">🧲 MODAL MASUK MASA HARGA TURUN</span>
+                    </div>
+                    <p>Pembeli besar menampung jualan — <strong style="color:#fbbf24;">net belian besar positif walaupun harga turun/flat</strong>. Calon "spring" sebelum melantun.</p>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th><th>Kaunter</th><th style="text-align:right;">Harga</th><th style="text-align:right;">Chg %</th><th style="text-align:right;">Net Big</th><th style="text-align:right;">Keamatan</th><th style="text-align:right;">Support Floor</th><th style="text-align:right;">SL</th><th>Nota</th>
+                </tr></thead>
+                <tbody>
+@@SPRING_ROWS@@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ============ TAB: PHOENIX ============ -->
+<div id="view-phoenix" class="tab-content">
+    <div class="radar-card radar-red">
+        <div class="radar-blob" style="background: rgba(244,63,94,.12);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">🔥</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #fb7185;">Phoenix Rider</h2>
+                        <span class="head-pill hp-red">⚡ +3% DENGAN ALIRAN MODAL</span>
+                    </div>
+                    <p>Bangkit semula dengan kekuatan: naik ≥3% sesi ini <strong style="color:#fb7185;">disokong aliran modal besar positif</strong> dan volum menaik.</p>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th><th>Kaunter</th><th style="text-align:right;">Harga</th><th style="text-align:right;">Chg %</th><th style="text-align:right;">RVOL</th><th style="text-align:right;">Net Big</th><th style="text-align:right;">Keamatan</th><th style="text-align:center;">Tindakan</th>
+                </tr></thead>
+                <tbody>
+@@PHX_ROWS@@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ============ TAB: BOTTOM ============ -->
+<div id="view-fishing" class="tab-content">
+    <div class="radar-card radar-cyan">
+        <div class="radar-blob" style="background: rgba(56,189,248,.1);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">🎣</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #7dd3fc;">Bottom Fishing</h2>
+                        <span class="head-pill hp-cyan">🧲 DEKAT DASAR 52M + ALIRAN MASUK</span>
+                    </div>
+                    <p>Dekat dasar 52 minggu (≤20%) tapi <strong style="color:#7dd3fc;">duit besar mula masuk</strong> — perhatian awal untuk pusingan dasar. Risiko tinggi — saiz kecil.</p>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead><tr>
+                    <th style="text-align:center; width:45px;">No</th><th>Kaunter</th><th style="text-align:right;">Harga</th><th style="text-align:right;">Chg %</th><th style="text-align:right;">Jarak Dasar 52M</th><th style="text-align:right;">Net Big</th><th style="text-align:right;">Keamatan</th><th style="text-align:center;">Tindakan</th>
+                </tr></thead>
+                <tbody>
+@@BOT_ROWS@@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ============ TAB: PORTFOLIO ============ -->
+<div id="view-portfolio" class="tab-content">
+    <div class="radar-card radar-purple">
+        <div class="radar-blob" style="background: rgba(168,85,247,.12);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">💼</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #c4b5fd;">Portfolio — Senarai Pantauan</h2>
+                        <span class="head-pill hp-purple">🎯 @@PORT_COUNT@@ NAMA</span>
+                    </div>
+                    <p>Watchlist peribadi + pilihan + blue-chip US dengan aliran modal, sokongan dan badge tindakan. Harga tick masa-nyata.</p>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="data-table" id="tPort">
+                <thead><tr>
+                    <th>Kaunter</th><th>Nama</th><th class="sortable" style="text-align:right;">Harga</th><th class="sortable" style="text-align:right;">Chg %</th><th class="sortable" style="text-align:right;">Net Big</th><th class="sortable" style="text-align:right;">Keamatan</th><th style="text-align:right;">Support Floor</th><th style="text-align:center;">Kumpulan</th><th style="text-align:center;">Tindakan</th><th>Nota</th>
+                </tr></thead>
+                <tbody>
+@@PORT_ROWS@@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ============ TAB: GUIDE ============ -->
+<div id="view-guide" class="tab-content">
+    <div class="radar-card radar-gold">
+        <div class="radar-blob" style="background: rgba(234,179,8,.12);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">📖</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #fde047;">SOP Guide — Cara Guna</h2>
+                        <span class="head-pill hp-gold">30 SAAT BACA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="guide-box">
+            <h3>1️⃣ Apa itu "Radar" di sini?</h3>
+            <p><b>🦈 Whales</b> — aliran order besar moomoo (institusi). <b>Net Big</b> = belian besar − jualan besar; <b>Keamatan</b> = Net Big ÷ nilai dagangan. <b>🔥 Fresh Rider</b> — dekat puncak 52M + volum tinggi (calon breakout). <b>⚡ Hot Theme</b> — pemimpin sektor panas. <b>🎯 Confluence</b> — lulus berbilang radar serentak. <b>🪜 VCP/Trend/Spring/Phoenix/Bottom</b> — corak teknikal. <b>📅 Tracker</b> — prestasi sebenar isyarat dari hari pertama.</p>
+        </div>
+        <div class="guide-box">
+            <h3>2️⃣ Badge tindakan (auto dari data)</h3>
+            <p>🟢 <b>AKUMULASI</b> inflow + keamatan ≥1.5% · 🧲 <b>SERAPAN</b> inflow masa harga rata/turun · ⭐ <b>PANTAU</b> inflow sederhana · 🔴 <b>AGIHAN</b> outflow · 📍 <b>DI PUNCAK</b> dalam 1.5% puncak 52M · 🚀 <b>DEKAT PUNCAK</b> dalam 5% + RVOL ≥1.5.</p>
+        </div>
+        <div class="guide-box">
+            <h3>3️⃣ Sokongan, SL &amp; Skor</h3>
+            <p><b>Sokongan (Support Floor)</b> = EMA50 — garis sokongan dinamik. <b>SL kiraan</b> = sokongan −3% (cadangan kiraan, bukan nasihat). <b>Skor /100</b> = 40% RVOL + 40% kedekatan puncak 52M + 20% trend (harga &gt; EMA20). <b>Tightness</b> = julat harian (kecil = rapi). <b>Pullback</b> = jarak dari puncak 52M.</p>
+        </div>
+        <div class="guide-box">
+            <h3>4️⃣ Cara guna harian</h3>
+            <ul>
+                <li>Mula di <b>🔥 Fresh Rider</b> — senarai pendek calon breakout dengan SL jelas.</li>
+                <li>Semak <b>🦈 Whales</b> — pastikan duit besar menyokong (atau sekurang-kurangnya tidak keluar).</li>
+                <li><b>🎯 Confluence</b> — nama yang lulus 2+ radar biasanya paling berkualiti.</li>
+                <li>Hormati SL. Jangan kejar saham yang sudah jauh (lihat Pullback %).</li>
+                <li>Pantau <b>📅 Tracker</b> — biar data sebenar, bukan emosi, yang menilai.</li>
+            </ul>
+        </div>
+        <div class="guide-box">
+            <h3>⚠️ Risiko &amp; Penafian</h3>
+            <p>Semua angka adalah <b>data pasaran langsung</b> (bukan ramalan) dari moomoo OpenD LV3 + pengiraan kami. <b>Bukan nasihat pelaburan.</b> Saham AS terdedah risiko modal — saizkan posisi anda sendiri. Sahkan berita sebelum bertindak. @@GUIDE_SCAN@@</p>
+        </div>
+    </div>
+</div>
+
+<!-- ============ TAB: CALCULATOR ============ -->
+<div id="view-calculator" class="tab-content">
+    <div class="interactive-panel">
+        <div class="calc-card">
+            <div class="calc-header">🧮 Calculator — Saiz Posisi &amp; Risiko</div>
+            <div class="calc-grid">
+                <div class="calc-group">
+                    <label>Pilih Kaunter</label>
+                    <select id="calcTicker">
+@@CALC_OPTIONS@@
+                    </select>
+                </div>
+                <div class="calc-group">
+                    <label>Modal Anda ($)</label>
+                    <input type="number" id="calcCapital" value="2000" min="100" step="100" oninput="calculatePlan()">
+                </div>
+            </div>
+            <div class="calc-results">
+                <div class="result-row"><span class="result-label">Harga Semasa</span><span class="result-value" id="calcCurrentPrice">—</span></div>
+                <div class="result-row"><span class="result-label">Support Floor (EMA50)</span><span class="result-value" style="color: #60a5fa;" id="calcFloorPrice">—</span></div>
+                <div class="result-row"><span class="result-label">Stop Loss (SL) (−3% dari sokongan)</span><span class="result-value danger" id="calcSlPrice">—</span></div>
+                <div class="result-row"><span class="result-label">Maksimum Saham (modal ÷ harga)</span><span class="result-value" id="calcLots">—</span></div>
+                <div class="result-row"><span class="result-label">Modal Dilaburkan</span><span class="result-value" id="calcActualCapital">—</span></div>
+                <div class="result-row"><span class="result-label">Risiko Maks (jika SL kena)</span><span class="result-value danger" id="calcMaxRisk">—</span></div>
+                <div class="result-row"><span class="result-label">Profit Target 1 (+10%)</span><span class="result-value success" id="calcTp1">—</span></div>
+                <div class="result-row"><span class="result-label">Profit Target 2 (+20%)</span><span class="result-value success" id="calcTp2">—</span></div>
+            </div>
+        </div>
+        <div class="calc-card" style="border-color: rgba(148,163,184,.3);">
+            <div class="calc-header" style="color: #cbd5e1;">📘 Nota Calculator</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; line-height: 1.7;">Calculator menggunakan fakta sesi semasa: harga langsung + sokongan EMA50 kiraan kami. SL = sokongan −3%. TP1/TP2 = +10%/+20% dari harga kemasukan. <b style="color:#fbbf24;">Ini alat bantu saiz posisi — bukan cadangan beli.</b></p>
+        </div>
+    </div>
+</div>
+
+<!-- ============ TAB: NEWS ============ -->
+<div id="view-news" class="tab-content">
+    <div class="radar-card radar-cyan">
+        <div class="radar-blob" style="background: rgba(6,182,212,.12);"></div>
+        <div class="radar-head">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 300px;">
+                <span class="r-emoji">📰</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                        <h2 style="color: #22d3ee;">Berita &amp; Amaran</h2>
+                        <span class="head-pill hp-cyan">Auto: 3 tajuk terkini setiap nama utama (moomoo) — klik segar setiap ~15 min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="calls">
       <div class="call green"><div class="h"><b>NBIS</b><span>2026/10/6 · TipRanks</span></div><p>Nebius Group NV Call Volume Above Normal and Directionally Bullish</p></div>
       <div class="call "><div class="h"><b>NXPI</b><span>2026/10/6 · GlobeNewswire</span></div><p>NXP Semiconductors Announces Conference Call to Review Third Quarter 2026 Financial Results</p></div>
       <div class="call "><div class="h"><b>VRNS</b><span>2026/9/21 · GlobeNewswire</span></div><p>Varonis Recognized as a Pace Setter in the Gartner Emerging Market Quadrant for AI Application Security - Established Vendors</p></div>
@@ -387,73 +908,39 @@ td.note{font-family:var(--sans);color:var(--dim);font-size:11.5px;white-space:no
       <div class="call green"><div class="h"><b>SMTC</b><span>2026/10/5 · Moomoo News</span></div><p>Stifel Maintains Semtech(SMTC.US) With Buy Rating, Raises Target Price to $220</p></div>
       <div class="call "><div class="h"><b>SPCX</b><span>2026/10/6 · TipRanks</span></div><p>SpaceX Stock Gains Ahead of 328M-Share Unlock on October 9. Here's What Investors Need to Know</p></div>
       <div class="call red"><div class="h"><b>ON</b><span>2026/10/6 · Zhitong Finance</span></div><p>After a 11% plunge over two months, Goldman Sachs turns bullish on the Philadelphia Semiconductor Index: Has the semiconductor sector's &quot;golden pit&quot; a</p></div>
+        </div>
     </div>
-  </section>
+</div>
 
-  <section data-g="news">
-    <div class="sec-head"><h2><span class="tick">▮</span>🎯 FOKUS PANTAUAN</h2><span class="sub">Auto-jana dari data aliran — bukan nasihat</span></div>
-    <div class="split">
-      <div class="panel g">
-        <h3>▲ PANTAU — aliran menyokong</h3>
-        <ul>
-          <li><b>MRVL</b><span>Aliran +$38.11M · +7.10%</span></li>
-          <li><b>MSFT</b><span>Aliran +$29.80M · +1.94%</span></li>
-          <li><b>AES</b><span>Aliran +$11.43M · +0.17%</span></li>
-          <li><b>NTNX</b><span>Aliran +$1.81M · -0.27%</span></li>
-          <li><b>NBIS</b><span>Aliran +$14.87M · +6.32%</span></li>
-        </ul>
-      </div>
-      <div class="panel r">
-        <h3>▼ BERHATI / ELAK</h3>
-        <ul>
-          <li><b>OPCH</b><span>Keluar -$13.43M · +32.86%</span></li>
-          <li><b>PTC</b><span>Keluar -$8.88M · +0.50%</span></li>
-          <li><b>INTC</b><span>Keluar -$7.72M · -0.38%</span></li>
-          <li><b>NBIS</b><span>⚠️ insider sell-off (Form 144 $121M) — tunggu bekalan diserap</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <div class="footer">
-    <div>
-      <b>Method:</b> moomoo OpenD LV3 — <span class="mono">get_capital_distribution</span> untuk 225 saham (universiti screens + senarai pantauan), sesi Selasa 6 Okt 2026. Net Big = capital_in_big − capital_out_big; Keamatan = Net Big ÷ nilai dagangan (turnover snapshot). Faktor teknikal (RVOL, EMA20/50, jarak 52M) dari enjin saringan. Tier "super" biasanya kosong untuk saham AS — ukuran utama ialah big + mid.
-    </div>
-    <div style="text-align:right">
-      Auto: setiap ~15 min semasa sesi AS · Pelayan: OK · OpenD: READY<br>
-      <b>Bukan nasihat pelaburan.</b> Data sesi — aliran boleh berubah. Sahkan dengan harga/berita sebelum bertindak.<br>
-      Dijana oleh <b>Hermes Agent</b> · auto-deploy: GitHub Pages
-    </div>
-  </div>
+<div class="footer-note">
+    <b>Method:</b> moomoo OpenD LV3 — <span class="font-mono">get_capital_distribution</span> untuk 222 saham (universiti screens + senarai pantauan), sesi Selasa 6 Okt 2026. Net Big = capital_in_big − capital_out_big; Keamatan = Net Big ÷ nilai dagangan. Faktor teknikal (RVOL, EMA20/50, jarak 52M, julat) dari enjin saringan. Tier "super" biasanya kosong untuk saham AS — ukuran utama ialah big + mid. Halaman auto-kemas kini (~15 min) semasa sesi AS + tick harga masa-nyata. Auto: setiap ~15 min semasa sesi AS · Pelayan: OK · OpenD: READY · Dijana oleh <b>Hermes Agent</b> · auto-deploy GitHub Pages.<br><br>
+    <b>⚠️ Risk Disclosure:</b> Jerung Wall Street ialah alat penyelidikan kuantitatif &amp; pendidikan untuk kegunaan peribadi — <b>bukan</b> khidmat nasihat pelaburan berlesen. Pelaburan ekuiti AS membawa risiko modal. Semua angka prestasi tracker = simulasi $2,000/posisi bermula @@TRK_START@@ — rekod isyarat sebenar, bukan jaminan pulangan masa hadapan. Buat kajian sendiri (DYOR).
 </div>
 
 <script>
 (function(){
   "use strict";
-  var BUILD_ID = "7c81d4402c21";
+  var BUILD_ID = "be65838eecf2";
 
-  // ---- tab radar
-  var tabs = document.querySelectorAll('.tab');
-  var gsecs = document.querySelectorAll('[data-g]');
-  tabs.forEach(function(b){
-    b.addEventListener('click', function(){
-      tabs.forEach(function(x){ x.classList.remove('on'); });
-      b.classList.add('on');
-      var g = b.getAttribute('data-t');
-      gsecs.forEach(function(s){
-        var gs = (s.getAttribute('data-g')||'').split(/\s+/);
-        s.classList.toggle('hide', !(g === 'all' || gs.indexOf(g) >= 0));
-      });
-    });
-  });
+  // ---- Tab switching (klon gaya JerungBursa)
+  window.switchTab = function(name){
+    document.querySelectorAll('.tab-btn').forEach(function(t){ t.classList.remove('active'); });
+    var btn = document.getElementById('tab-' + name);
+    if(btn) btn.classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(function(v){ v.classList.remove('active'); });
+    var view = document.getElementById('view-' + name);
+    if(view) view.classList.add('active');
+    try { history.replaceState(null, '', '#' + name); } catch(e){}
+  };
+  if(location.hash) { var h = location.hash.slice(1); if(document.getElementById('view-' + h)) switchTab(h); }
 
-  // ---- susun lajur (indeks dinamik)
+  // ---- Susun lajur (indeks dinamik)
   function cellVal(td){
     var t = td.textContent.trim();
     var n = parseFloat(t.replace(/[$%,+↕\s]/g, ''));
     return {num: isNaN(n) ? null : n, txt: t};
   }
-  document.querySelectorAll('table thead th[data-k]').forEach(function(th){
+  document.querySelectorAll('th.sortable').forEach(function(th){
     th.addEventListener('click', function(){
       var table = th.closest('table');
       var idx = Array.prototype.indexOf.call(th.parentNode.children, th);
@@ -471,21 +958,69 @@ td.note{font-family:var(--sans);color:var(--dim);font-size:11.5px;white-space:no
     });
   });
 
-  // ---- tapisan pantauan
-  var btns = document.querySelectorAll('.fbtn');
-  btns.forEach(function(b){
-    b.addEventListener('click', function(){
-      btns.forEach(function(x){ x.classList.remove('on'); });
-      b.classList.add('on');
-      var f = b.getAttribute('data-f');
-      var tb = document.querySelector('#tWatch tbody');
-      Array.prototype.forEach.call(tb.rows, function(tr){
-        var g = tr.getAttribute('data-grp'), s = tr.getAttribute('data-sign');
-        var show = (f === 'all') || (f === 'pos' && s === 'pos') || (f === 'neg' && s === 'neg') || (f === 'w' && g === 'w');
-        tr.style.display = show ? '' : 'none';
-      });
+  // ---- Kawalan toolbar (Fresh Rider)
+  function applyControls(){
+    var grpEl = document.getElementById('grpFilter'), sortEl = document.getElementById('sortByFilter'),
+        strictEl = document.getElementById('strictFilter'), confEl = document.getElementById('confFilter');
+    var grp = grpEl ? grpEl.value : 'ALL';
+    var sort = sortEl ? sortEl.value : 'SMART';
+    var strict = strictEl ? strictEl.checked : false;
+    var conf = confEl ? confEl.checked : false;
+    var tb = document.querySelector('#tFresh tbody');
+    if(!tb) return;
+    var rows = Array.prototype.slice.call(tb.rows);
+    rows.forEach(function(tr){
+      var sc = parseFloat(tr.getAttribute('data-sc') || '0');
+      var tags = parseInt(tr.getAttribute('data-tags') || '0', 10);
+      var isW = tr.getAttribute('data-w') === '1';
+      var show = true;
+      if(grp === 'W' && !isW) show = false;
+      if(grp === 'SC' && isW) show = false;
+      if(strict && sc < 85) show = false;
+      if(conf && tags < 2) show = false;
+      tr.style.display = show ? '' : 'none';
     });
+    var key = sort === 'SCORE' ? 'sc' : sort === 'RVOL' ? 'rvol' : sort === 'TURNOVER' ? 'turn' : 'smart';
+    rows.sort(function(a, b){
+      var va = parseFloat(a.getAttribute('data-' + key) || '0');
+      var vb = parseFloat(b.getAttribute('data-' + key) || '0');
+      return vb - va;
+    });
+    rows.forEach(function(r){ tb.appendChild(r); });
+  }
+  ['grpFilter','sortByFilter','strictFilter','confFilter'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.addEventListener('change', applyControls);
   });
+  applyControls();
+
+  // ---- Calculator (klon gaya JerungBursa)
+  var CALC = @@CALC_DATA@@;
+  window.calculatePlan = function(){
+    var sel = document.getElementById('calcTicker');
+    if(!sel) return;
+    var t = sel.value, d = CALC[t] || {};
+    var capEl = document.getElementById('calcCapital');
+    var cap = parseFloat(capEl ? capEl.value : '2000') || 2000;
+    var price = d.price || 0, floor = d.floor || (price ? price * 0.97 : 0);
+    var sl = floor * 0.97;
+    var shares = price > 0 ? Math.floor(cap / price) : 0;
+    var invested = shares * price;
+    var risk = shares * (price - sl);
+    var tp1 = invested * 1.10, tp2 = invested * 1.20;
+    function money(x){ return "$" + x.toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}); }
+    document.getElementById('calcCurrentPrice').textContent = money(price);
+    document.getElementById('calcFloorPrice').textContent = floor ? money(floor) + " (" + ((price/floor - 1) * 100).toFixed(1) + "% bawah harga)" : "—";
+    document.getElementById('calcSlPrice').textContent = sl ? money(sl) : "—";
+    document.getElementById('calcLots').textContent = shares.toLocaleString() + " saham";
+    document.getElementById('calcActualCapital').textContent = money(invested);
+    document.getElementById('calcMaxRisk').textContent = "-" + money(risk);
+    document.getElementById('calcTp1').textContent = money(tp1) + " (+" + money(tp1 - invested) + ")";
+    document.getElementById('calcTp2').textContent = money(tp2) + " (+" + money(tp2 - invested) + ")";
+  };
+  var cs = document.getElementById('calcTicker');
+  if(cs) cs.addEventListener('change', calculatePlan);
+  calculatePlan();
 
   // ---- auto-refresh bila build baharu
   function checkVersion(){
@@ -502,14 +1037,14 @@ td.note{font-family:var(--sans);color:var(--dim);font-size:11.5px;white-space:no
 // ---- Tick harga masa-nyata (suapan awam Yahoo; fallback = harga snapshot skrip)
 (function(){
   "use strict";
-  var SYMS = ["SPY", "QQQ", "IWM", "SMH", "MRVL", "MSFT", "NVDA", "AES", "NTNX", "EQNR", "BP", "PBR", "NTSK", "NRG", "AZTA", "CRCL", "BTSG", "LW", "SEI", "UUUU", "CCJ", "ELAN", "TECH", "CRWD", "FTNT", "S", "FRSH", "OKTA", "ANET", "XP", "SKHY", "DT", "OPCH", "PTC", "INTC", "SNOW", "BE", "NBIS", "AMD", "NOW", "SPCX", "VRNS", "ON", "NTAP", "ZETA", "TENB", "NXPI", "SMTC", "TXN", "HPE", "GH"];
+  var SYMS = ["SPY", "QQQ", "IWM", "SMH", "MRVL", "MSFT", "MRNA", "AES", "NTNX", "EQNR", "PBR", "NTSK", "BP", "NRG", "SNAP", "FROG", "UUUU", "SEI", "AZTA", "GAP", "CCJ", "LW", "TECH", "FRSH", "CRWD", "FTNT", "S", "ANET", "NVDA", "OKTA", "XP", "RBRK", "TRMD", "INTC", "OPCH", "PTC", "SNOW", "BE", "NBIS", "AMD", "NOW", "VRNS", "ON", "NTAP", "TENB", "ZETA", "NXPI", "SPCX", "TXN", "SMTC", "GH", "HPE"];
   var chipTxt = document.getElementById("liveTxt");
   var chipDot = document.getElementById("liveDot");
   var elmap = {};
   Array.prototype.forEach.call(document.querySelectorAll("[data-sym]"), function(el){
     var s = el.getAttribute("data-sym");
     if(!s) return;
-    var rec = {prc: el.querySelector(".prc, .hprc, .cprc"), chg: el.querySelector(".chg, .hchg, .cchg")};
+    var rec = {prc: el.querySelector(".prc, .hprc, .cprc"), chg: el.querySelector(".chg, .hchg, .cchg"), ret: el.querySelector(".trkret")};
     (elmap[s] = elmap[s] || []).push(rec);
   });
   function flash(el, up){
@@ -531,6 +1066,15 @@ td.note{font-family:var(--sans);color:var(--dim);font-size:11.5px;white-space:no
         o.chg.textContent = (pct >= 0 ? "+" : "") + pct.toFixed(2) + "%";
         o.chg.classList.remove("up","down","neut");
         o.chg.classList.add(pct >= 0 ? "up" : "down");
+      }
+      if(o.ret){
+        var e0 = parseFloat(o.ret.getAttribute("data-entry") || "");
+        if(e0){
+          var rr = (price / e0 - 1) * 100;
+          o.ret.textContent = (rr >= 0 ? "+" : "") + rr.toFixed(1) + "%";
+          o.ret.classList.remove("up","down");
+          o.ret.classList.add(rr >= 0 ? "up" : "down");
+        }
       }
     });
   }
@@ -563,18 +1107,12 @@ td.note{font-family:var(--sans);color:var(--dim);font-size:11.5px;white-space:no
     if(!chipTxt) return;
     if(connected && ticks > 0){
       chipTxt.textContent = "TICKS LIVE · " + new Date(lastMsg).toTimeString().slice(0,8);
-      chipDot.style.background = "var(--green)";
-      chipDot.style.boxShadow = "0 0 6px rgba(34,197,94,.8)";
       chipDot.classList.add("live");
     } else if(connected){
       chipTxt.textContent = "TICKS · menunggu…";
-      chipDot.style.background = "var(--amber)";
-      chipDot.style.boxShadow = "none";
       chipDot.classList.remove("live");
     } else {
       chipTxt.textContent = "TICKS · harga snapshot";
-      chipDot.style.background = "var(--muted)";
-      chipDot.style.boxShadow = "none";
       chipDot.classList.remove("live");
     }
   }
