@@ -82,11 +82,11 @@ def fcsapi_metals():
     if _FCS_TRIED or not FCSAPI_KEY:
         return {}
     _FCS_TRIED = True
-    qs = urllib.parse.urlencode({"symbol": "XAU/USD,XAG/USD", "access_key": FCSAPI_KEY})
+    qs = urllib.parse.urlencode({"symbol": "XAUUSD,XAGUSD", "access_key": FCSAPI_KEY})
     try:
         j = json.loads(get(f"https://api-v4.fcsapi.com/forex/latest?{qs}", timeout=25))
     except Exception as e:
-        print(f"warn fcsapi: {e}")
+        print(f"warn fcsapi: {str(e).replace(FCSAPI_KEY, '***')}")
         return {}
     rows = []
     for k in ("data", "response", "result", "list"):
@@ -100,13 +100,16 @@ def fcsapi_metals():
     for it in rows:
         if not isinstance(it, dict):
             continue
-        sym = str(it.get("symbol") or it.get("s") or it.get("id") or "").upper()
-        p = _price_of(it)
+        tick = str(it.get("ticker") or it.get("symbol") or it.get("s") or it.get("id") or "").upper()
+        act = it.get("active") if isinstance(it.get("active"), dict) else it
+        p = _price_of(act)
         if p is None:
             continue
-        for m in ("XAU", "XAG"):
-            if m in sym or (m == "XAU" and "GOLD" in sym) or (m == "XAG" and "SILVER" in sym):
-                out[m] = {"p": round(p, 2), "chg": _chg_of(it), "src": "fcsapi"}
+        for m, need in (("XAU", "XAUUSD"), ("XAG", "XAGUSD")):
+            if need in tick or (m == "XAU" and "GOLD" in tick) or (m == "XAG" and "SILVER" in tick):
+                old = out.get(m)
+                if old is None or (tick.startswith("FX:") and not str(old.get("ticker", "")).startswith("FX:")):
+                    out[m] = {"p": round(p, 2), "chg": _chg_of(act), "src": "fcsapi", "ticker": tick}
     _FCS_CACHE = out
     return out
 
