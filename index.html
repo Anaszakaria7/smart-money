@@ -293,6 +293,9 @@ td.no { font-weight: 800; text-align: center; }
 .avart a { color:#cbd5e1; text-decoration:none; }
 .avart a:hover { color:#c4b5fd; text-decoration:underline; }
 
+/* ---- Mode awan (fallback PC off) ---- */
+.cloud-badge { position:fixed; right:14px; bottom:14px; z-index:9999; background:rgba(19,23,34,.95); border:1px solid rgba(196,181,253,.45); color:#c4b5fd; font-size:0.68rem; padding:0.4rem 0.72rem; border-radius:999px; box-shadow:0 4px 14px rgba(0,0,0,.45); font-family:inherit; }
+
 </style>
 </head>
 <body>
@@ -1586,7 +1589,7 @@ td.no { font-weight: 800; text-align: center; }
             </div>
         </div>
         <div class="avp-grid">
-<div class="avp"><div class="avp-h">🥇 Logam Spot <span class="avp-tag">GOLD_SILVER_SPOT</span></div><div class="avp-body avp2col"><div class="avp-big"><span class="avp-lbl">XAU / oz</span><span class="avp-val" style="color:#F59E0B">$4,167.93</span></div><div class="avp-big"><span class="avp-lbl">XAG / oz</span><span class="avp-val" style="color:#cbd5e1">$61.35</span></div></div><div class="avp-note">spot antarabangsa · 2026-10-06 15:47 · OANDA via Alpha Vantage</div></div>
+<div class="avp"><div class="avp-h">🥇 Logam Spot <span class="avp-tag">GOLD_SILVER_SPOT</span></div><div class="avp-body avp2col"><div class="avp-big"><span class="avp-lbl">XAU / oz</span><span class="avp-val" id="avXAU" style="color:#F59E0B">$4,167.93</span></div><div class="avp-big"><span class="avp-lbl">XAG / oz</span><span class="avp-val" id="avXAG" style="color:#cbd5e1">$61.35</span></div></div><div class="avp-note">spot antarabangsa · 2026-10-06 15:47 · OANDA via Alpha Vantage</div></div>
 <div class="avp"><div class="avp-h">📊 Top Movers <span class="avp-tag">TOP_GAINERS_LOSERS</span></div><div class="avp-body avp3col"><div><div class="avp-sub">🚀 Naik</div><div class="avmv"><b>MI</b><span class="avpo">+666.2%</span><span class="avn">$6.85</span></div><div class="avmv"><b>SAIQ</b><span class="avpo">+260.5%</span><span class="avn">$6.67</span></div><div class="avmv"><b>BTBDW</b><span class="avpo">+194.7%</span><span class="avn">$0.03</span></div><div class="avmv"><b>SSEAR</b><span class="avpo">+100.0%</span><span class="avn">$0.14</span></div><div class="avmv"><b>AMPGZ</b><span class="avpo">+95.3%</span><span class="avn">$0.24</span></div></div><div><div class="avp-sub">🔻 Turun</div><div class="avmv"><b>NMCO^</b><span class="avne">-65.7%</span><span class="avn">$0.01</span></div><div class="avmv"><b>UWMC^#</b><span class="avne">-63.1%</span><span class="avn">$0.01</span></div><div class="avmv"><b>NIVFW</b><span class="avne">-55.4%</span><span class="avn">$0.01</span></div><div class="avmv"><b>NRSNW</b><span class="avne">-49.5%</span><span class="avn">$0.04</span></div><div class="avmv"><b>SDEV</b><span class="avne">-47.7%</span><span class="avn">$3.92</span></div></div><div><div class="avp-sub">🔥 Aktif</div><div class="avmv"><b>WBD</b><span class="avpo">+0.0%</span><span class="avn">$30.95</span></div><div class="avmv"><b>BEAT</b><span class="avpo">+50.5%</span><span class="avn">$0.65</span></div><div class="avmv"><b>EWZ</b><span class="avpo">+12.6%</span><span class="avn">$42.99</span></div><div class="avmv"><b>CTVA</b><span class="avpo">+4.1%</span><span class="avn">$12.40</span></div><div class="avmv"><b>NU</b><span class="avpo">+13.2%</span><span class="avn">$15.20</span></div></div></div><div class="avp-note">penutup sesi sebelumnya · 2026-10-05 16:15:59 US/Eastern</div></div>
 <div class="avp"><div class="avp-h">🏛️ Ekonomi Makro <span class="avp-tag">TREASURY · FED · CPI</span></div><div class="avp-body avp3col"><div class="avp-big"><span class="avp-lbl">US 10Y</span><span class="avp-val">4.99%</span><span class="avp-note2">2026-09 <span class="avpo">+0.31</span></span></div><div class="avp-big"><span class="avp-lbl">Fed Funds</span><span class="avp-val">3.75%</span><span class="avp-note2">2026-09 <span class="avpo">+0.12</span></span></div><div class="avp-big"><span class="avp-lbl">CPI</span><span class="avp-val">334.98</span><span class="avp-note2">2026-08 <span class="avpo">+1.06</span></span></div></div><div class="avp-note">data bulanan · perubahan vs bulan sebelumnya</div></div>
 <div class="avp"><div class="avp-h">🕵️ Insider SEC <span class="avp-tag">INSIDER_TRANSACTIONS · 60h</span></div><div class="avp-body avp3col"><div><div class="avp-sub">AAOI <span class="avn">🟢0 🔴5</span></div><div class="avmv"><span class="avb avb-sell">JUAL</span><span class="avn">BLACK, RICHARD B</span><span class="avmo">2,200 @ —</span><span class="avn">15 Sep</span></div><div class="avmv"><span class="avb avb-sell">JUAL</span><span class="avn">MURRY, STEFAN J.</span><span class="avmo">4,000 @ $105.33</span><span class="avn">10 Sep</span></div><div class="avmv"><span class="avb avb-sell">JUAL</span><span class="avn">CHANG, HUNG-LUN (FRED)</span><span class="avmo">32,172 @ $110.21</span><span class="avn">08 Sep</span></div></div><div><div class="avp-sub">ABBV <span class="avn">🟢3 🔴1</span></div><div class="avmv"><span class="avb avb-buy">BELI</span><span class="avn">RAPP, EDWARD J</span><span class="avmo">129 @ $261.59</span><span class="avn">30 Sep</span></div><div class="avmv"><span class="avb avb-buy">BELI</span><span class="avn">QUAGGIN, SUSAN E</span><span class="avmo">59 @ $261.59</span><span class="avn">30 Sep</span></div><div class="avmv"><span class="avb avb-buy">BELI</span><span class="avn">DONOGHOE, NICHOLAS</span><span class="avmo">32,710 @ $79.02</span><span class="avn">14 Ogos</span></div></div><div><div class="avp-sub">ABSI <span class="avn">🟢0 🔴1</span></div><div class="avmv"><span class="avb avb-sell">JUAL</span><span class="avn">JONASSON, ZACHARIAH</span><span class="avmo">8,320 @ $8.71</span><span class="avn">31 Ogos</span></div></div></div><div class="avp-note">Form 4 · 🟢 beli 🔴 jual · calon teratas hari ini</div></div>
@@ -1842,6 +1845,48 @@ td.no { font-weight: 800; text-align: center; }
   setChip();
   connect();
   setInterval(setChip, 15000);
+})();
+</script>
+<script>
+/* ---- CLOUD REFRESH: fallback bila PC off (data awan dari GitHub Actions) ---- */
+(function () {
+  function fmtP(x) { return "$" + Number(x).toFixed(2); }
+  function fmtC(x) { return (x >= 0 ? "+" : "") + Number(x).toFixed(2) + "%"; }
+  window.addEventListener('load', function () {
+    setTimeout(async function () {
+      try {
+        var v = await (await fetch('version.json?ts=' + Date.now(), { cache: 'no-store' })).json();
+        var ageMin = (Date.now() - Date.parse(v.generated)) / 60000;
+        if (!(ageMin > 60)) return; // laman masih segar — tak perlu
+        var c = await (await fetch('data/cloud_refresh.json?ts=' + Date.now(), { cache: 'no-store' })).json();
+        var cAge = (Date.now() - Date.parse(c.ts)) / 60000;
+        if (!(cAge < 240)) return; // data awan pun basi
+        var n = 0, syms = c.syms || {};
+        Object.keys(syms).forEach(function (k) {
+          var el = document.querySelector('.chip[data-sym="' + k + '"]');
+          if (!el) return;
+          var p = el.querySelector('.cprc'), ch = el.querySelector('.cchg');
+          if (p && syms[k].p != null) p.textContent = fmtP(syms[k].p);
+          if (ch && syms[k].chg != null) {
+            ch.textContent = fmtC(syms[k].chg);
+            ch.classList.remove('pos', 'neg');
+            ch.classList.add(syms[k].chg >= 0 ? 'pos' : 'neg');
+          }
+          n++;
+        });
+        var m = c.metals || {};
+        var gx = document.getElementById('avXAU'), sx = document.getElementById('avXAG');
+        if (gx && m.XAU && m.XAU.p != null) { gx.textContent = fmtP(m.XAU.p); n++; }
+        if (sx && m.XAG && m.XAG.p != null) { sx.textContent = fmtP(m.XAG.p); n++; }
+        if (n > 0) {
+          var b = document.createElement('div');
+          b.className = 'cloud-badge';
+          b.textContent = '☁️ Mode awan · chips & logam dikemas kini ' + String(c.ts || '').slice(11, 16) + ' MYT (PC off)';
+          document.body.appendChild(b);
+        }
+      } catch (e) { /* senyap */ }
+    }, 1500);
+  });
 })();
 </script>
 </body>
