@@ -2,7 +2,12 @@ name: cloud-refresh
 on:
   schedule:
     - cron: "*/30 * * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      force_fcs:
+        description: "Paksa FCSAPI walau luar waktu AS (ujian)"
+        type: boolean
+        default: false
 permissions:
   contents: write
 concurrency:
@@ -17,6 +22,9 @@ jobs:
         with:
           python-version: "3.12"
       - name: Jana data awan
+        env:
+          FCSAPI_KEY: ${{ secrets.FCSAPI_KEY }}
+          FCSAPI_FORCE: ${{ github.event.inputs.force_fcs == 'true' && '1' || '' }}
         run: python scripts/cloud_refresh.py
       - name: Commit jika berubah
         run: |
