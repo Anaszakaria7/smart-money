@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-12T09:37:09+08:00",
+ "ts": "2026-10-12T16:54:01+08:00",
  "src": "cloud",
  "syms": {
   "SPY": {
@@ -21,16 +21,12 @@
  },
  "metals": {
   "XAU": {
-   "p": 4204.57,
-   "chg": 0.25,
-   "src": "fcsapi",
-   "ticker": "FX:XAUUSD"
+   "p": 4174.4,
+   "src": "gold-api"
   },
   "XAG": {
-   "p": 61.18,
-   "chg": 0.59,
-   "src": "fcsapi",
-   "ticker": "GMC:XAGUSD"
+   "p": 60.63,
+   "src": "gold-api"
   }
  }
 }
